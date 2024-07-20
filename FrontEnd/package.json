@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@clerk/themes": "^2.1.12",
     "pinia": "^2.1.7",
     "vue": "^3.4.29",
     "vue-clerk": "^0.4.10",
