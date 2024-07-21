@@ -1,4 +1,11 @@
-<script setup></script>
+<script setup>
+import { useAuth } from "vue-clerk";
+import { useMiddleware } from "@/helpers/useMiddleware";
+
+const { isSignedIn } = useAuth();
+
+useMiddleware(isSignedIn.value);
+</script>
 
 <template>
   <main>
