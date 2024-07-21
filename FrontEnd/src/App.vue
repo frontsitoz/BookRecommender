@@ -17,20 +17,23 @@ import { SignedIn, SignedOut, UserButton, ClerkLoaded } from "vue-clerk";
           />
         </div>
 
-        <SignedOut>
-          <nav class="flex items-center gap-10 text-xl font-semibold">
+        <nav class="flex items-center gap-10 text-xl font-semibold">
+          <SignedOut>
             <RouterLink to="/sign-in" class="text-white hover:text-[#b5b5b5]"
               >SignIn</RouterLink
             >
             <RouterLink to="/sign-up" class="text-white hover:text-[#b5b5b5]"
               >SignUp</RouterLink
             >
-          </nav>
-        </SignedOut>
+          </SignedOut>
 
-        <SignedIn>
-          <UserButton after-sign-out-url="/sign-in" />
-        </SignedIn>
+          <SignedIn>
+            <RouterLink to="/profile" class="text-white hover:text-[#b5b5b5]"
+              >Profile</RouterLink
+            >
+            <UserButton after-sign-out-url="/sign-in" />
+          </SignedIn>
+        </nav>
       </div>
     </header>
 
