@@ -4,7 +4,7 @@ import { SignedIn, SignedOut, UserButton, ClerkLoaded } from "vue-clerk";
 </script>
 
 <template>
-  <section class="relative">
+  <section class="min-h-screen overflow-hidden">
     <header
       class="relative bg-[#060815] px-36 z-50 border-b-[0.5px] border-[#a5fe52]"
     >
@@ -17,31 +17,36 @@ import { SignedIn, SignedOut, UserButton, ClerkLoaded } from "vue-clerk";
           />
         </div>
 
-        <SignedOut>
-          <nav class="flex items-center gap-10 text-xl font-semibold">
+        <nav class="flex items-center gap-10 text-xl font-semibold">
+          <SignedOut>
             <RouterLink to="/sign-in" class="text-white hover:text-[#b5b5b5]"
               >SignIn</RouterLink
             >
             <RouterLink to="/sign-up" class="text-white hover:text-[#b5b5b5]"
               >SignUp</RouterLink
             >
-          </nav>
-        </SignedOut>
+          </SignedOut>
 
-        <SignedIn>
-          <UserButton after-sign-out-url="/sign-in" />
-        </SignedIn>
+          <SignedIn>
+            <RouterLink to="/profile" class="text-white hover:text-[#b5b5b5]"
+              >Profile</RouterLink
+            >
+            <UserButton after-sign-out-url="/sign-in" />
+          </SignedIn>
+        </nav>
       </div>
     </header>
 
-    <main class="container mx-auto">
-      <div class="flex items-center justify-center min-h-[calc(100dvh-80px)]">
-        <div>
-          <ClerkLoaded>
-            <RouterView />
-          </ClerkLoaded>
-        </div>
-      </div>
+    <main class="flex items-center justify-center min-h-[calc(100vh-80px)]">
+      <ClerkLoaded>
+        <RouterView />
+      </ClerkLoaded>
     </main>
   </section>
 </template>
+
+<style>
+body {
+  overflow: hidden;
+}
+</style>
