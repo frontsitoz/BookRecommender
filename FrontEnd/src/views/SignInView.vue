@@ -4,9 +4,9 @@ import { SignIn } from "vue-clerk";
 const appearance = {
   variables: {
     colorBackground: "#060815",
-    colorPrimary: "#2e026d", // Color principal para coherencia
-    colorText: "#ffffff", // Color del texto
-    borderRadius: "8px", // Bordes redondeados para un estilo moderno
+    colorPrimary: "#2e026d",
+    colorText: "#ffffff",
+    borderRadius: "8px",
   },
   elements: {
     card: {
@@ -42,18 +42,9 @@ const appearance = {
 </script>
 
 <template>
-  <main class="">
-    <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
-      <img
-        src="../assets/images/purple-books.jpg"
-        alt="purple-books"
-        class="w-full h-full object-cover"
-      />
-      <div
-        class="absolute top-0 left-0 w-full h-full bg-black opacity-50 backdrop-blur-sm"
-      ></div>
-    </div>
-
+  <main
+    class="bg-gradient-to-br from-[#0A0C15] via-[#1D4938] to-green-700 w-full h-[calc(100vh-80px)] flex items-center justify-center"
+  >
     <div class="relative z-30">
       <SignIn
         after-sign-in-url="/"

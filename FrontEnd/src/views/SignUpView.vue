@@ -42,18 +42,9 @@ const appearance = {
 </script>
 
 <template>
-  <main class="">
-    <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
-      <img
-        src="../assets/images/purple-books.jpg"
-        alt="purple-books"
-        class="w-full h-full object-cover"
-      />
-      <div
-        class="absolute top-0 left-0 w-full h-full bg-black opacity-50 backdrop-blur-sm"
-      ></div>
-    </div>
-
+  <main
+    class="bg-gradient-to-br from-[#0A0C15] via-[#1D4938] to-green-700 w-full h-[calc(100vh-80px)] flex items-center justify-center"
+  >
     <div class="relative z-30">
       <SignUp
         after-sign-up-url="/"
