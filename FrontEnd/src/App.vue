@@ -5,25 +5,24 @@ import { SignedIn, SignedOut, UserButton, ClerkLoaded } from "vue-clerk";
 
 <template>
   <section class="relative">
-    <header class="relative bg-[#060815] px-36 z-50">
+    <header
+      class="relative bg-[#060815] px-36 z-50 border-b-[0.5px] border-[#a5fe52]"
+    >
       <div class="flex justify-between items-center h-20 w-full">
-        <div
-          @click="$router.push('/')"
-          class="text-2xl font-extrabold text-[#a5fe52] hover:text-[#8ad346] cursor-pointer"
-        >
-          Book Recommender
+        <div @click="$router.push('/')" class="cursor-pointer">
+          <img
+            src="./assets/images/inkradar-white-logo.svg"
+            alt="logo"
+            width="180"
+          />
         </div>
 
         <SignedOut>
           <nav class="flex items-center gap-10 text-xl font-semibold">
-            <RouterLink
-              to="/sign-in"
-              class="text-[#a5fe52] hover:text-[#8ad346]"
+            <RouterLink to="/sign-in" class="text-white hover:text-[#b5b5b5]"
               >SignIn</RouterLink
             >
-            <RouterLink
-              to="/sign-up"
-              class="text-[#a5fe52] hover:text-[#8ad346]"
+            <RouterLink to="/sign-up" class="text-white hover:text-[#b5b5b5]"
               >SignUp</RouterLink
             >
           </nav>
