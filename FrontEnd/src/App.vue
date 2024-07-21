@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
-import { SignedIn, SignedOut, UserButton } from "vue-clerk";
+import { SignedIn, SignedOut, UserButton, ClerkLoaded } from "vue-clerk";
 </script>
 
 <template>
@@ -30,7 +30,7 @@ import { SignedIn, SignedOut, UserButton } from "vue-clerk";
         </SignedOut>
 
         <SignedIn>
-          <UserButton />
+          <UserButton after-sign-out-url="/sign-in" />
         </SignedIn>
       </div>
     </header>
@@ -38,7 +38,9 @@ import { SignedIn, SignedOut, UserButton } from "vue-clerk";
     <main class="container mx-auto">
       <div class="flex items-center justify-center min-h-[calc(100dvh-80px)]">
         <div>
-          <RouterView />
+          <ClerkLoaded>
+            <RouterView />
+          </ClerkLoaded>
         </div>
       </div>
     </main>
