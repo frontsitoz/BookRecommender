@@ -1,6 +1,7 @@
 <script setup>
 import { useMiddleware } from "@/helpers/useMiddleware";
 import ProfileLeftSidebar from "../components/ProfileLeftSidebar.vue";
+import ProfileDetails from "../components/ProfileDetails.vue";
 import { useAuth } from "vue-clerk";
 
 const { isSignedIn } = useAuth();
@@ -14,6 +15,8 @@ useMiddleware(isSignedIn.value);
   >
     <div class="flex py-10 gap-9 w-full h-full bg-[#0A0C15] rounded-3xl">
       <ProfileLeftSidebar />
+
+      <ProfileDetails />
     </div>
   </main>
 </template>
