@@ -25,11 +25,13 @@ const currentUser = user.value;
         class="mb-5"
       />
       <h1
-        class="font-montserrat uppercase text-center mb-1 text-white text-2xl font-medium"
+        class="font-montserrat uppercase line-clamp-2 max-w-[219px] max-h-[64px] text-center mb-1 text-white text-2xl font-medium"
       >
         {{ currentUser.fullName }}
       </h1>
-      <h4 class="font-montserrat mb-7 text-white text-xl">
+      <h4
+        class="font-montserrat truncate max-w-[219px] mb-7 text-white text-xl"
+      >
         @{{ currentUser.username }}
       </h4>
     </div>
