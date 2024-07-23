@@ -8,7 +8,7 @@ const currentUser = user.value;
 </script>
 
 <template>
-  <div
+  <section
     class="flex flex-col px-7 py-5 gap-3 items-center w-[350px] h-full border-r border-[#B9FC6E]"
   >
     <div class="flex flex-col items-center">
@@ -48,5 +48,5 @@ const currentUser = user.value;
         <span class="text-white"> 15</span>
       </h1>
     </div>
-  </div>
+  </section>
 </template>

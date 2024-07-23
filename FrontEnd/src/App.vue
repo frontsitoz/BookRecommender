@@ -19,16 +19,22 @@ import { SignedIn, SignedOut, UserButton, ClerkLoaded } from "vue-clerk";
 
         <nav class="flex items-center gap-10 text-xl font-semibold">
           <SignedOut>
-            <RouterLink to="/sign-in" class="text-white hover:text-[#b5b5b5]"
+            <RouterLink
+              to="/sign-in"
+              class="font-castoro text-[22px] text-white hover:text-[#b5b5b5]"
               >SignIn</RouterLink
             >
-            <RouterLink to="/sign-up" class="text-white hover:text-[#b5b5b5]"
+            <RouterLink
+              to="/sign-up"
+              class="font-castoro text-[22px] text-white hover:text-[#b5b5b5]"
               >SignUp</RouterLink
             >
           </SignedOut>
 
           <SignedIn>
-            <RouterLink to="/profile" class="text-white hover:text-[#b5b5b5]"
+            <RouterLink
+              to="/profile"
+              class="font-castoro text-[22px] text-white hover:text-[#b5b5b5]"
               >Profile</RouterLink
             >
             <UserButton after-sign-out-url="/sign-in" />
