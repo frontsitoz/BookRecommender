@@ -8,26 +8,45 @@ const currentUser = user.value;
 </script>
 
 <template>
-  <div class="flex py-10 gap-9 w-full h-full bg-[#0A0C15] rounded-3xl">
-    <div
-      class="flex flex-col px-7 items-center w-80 h-full border-r border-[#B9FC6E]"
-    >
+  <div
+    class="flex flex-col px-7 py-5 gap-3 items-center w-[350px] h-full border-r border-[#B9FC6E]"
+  >
+    <div class="flex flex-col items-center">
       <img
         :src="currentUser.imageUrl"
         alt="profile-img"
         width="150"
-        class="rounded-full mb-5"
+        class="rounded-full mb-7"
       />
       <img
         src="../assets/images/inkradar-member-logo.svg"
         alt="member-img"
         width="200"
-        class="mb-3"
+        class="mb-5"
       />
-      <p class="uppercase mb-1 text-white text-2xl font-medium">
+      <h1
+        class="font-montserrat uppercase text-center mb-1 text-white text-2xl font-medium"
+      >
         {{ currentUser.fullName }}
-      </p>
-      <p class="mb-7 text-white text-xl">@{{ currentUser.username }}</p>
+      </h1>
+      <h4 class="font-montserrat mb-7 text-white text-xl">
+        @{{ currentUser.username }}
+      </h4>
+    </div>
+
+    <div class="flex flex-col gap-5 items-center">
+      <h1 class="text-[#B9FC6E] text-2xl font-montserrat">
+        Books read:
+        <span class="text-white"> 7</span>
+      </h1>
+      <h1 class="text-[#B9FC6E] text-2xl font-montserrat">
+        Bookmarked:
+        <span class="text-white"> 3</span>
+      </h1>
+      <h1 class="text-[#B9FC6E] text-2xl font-montserrat">
+        Favorites:
+        <span class="text-white"> 15</span>
+      </h1>
     </div>
   </div>
 </template>
