@@ -16,7 +16,7 @@ const currentUser = user.value;
         :src="currentUser.imageUrl"
         alt="profile-img"
         width="150"
-        class="rounded-full mb-7"
+        class="rounded-full mb-7 shadow-[0_0_15px] shadow-[#B9FC6E]"
       />
       <img
         src="../assets/images/inkradar-member-logo.svg"
@@ -36,16 +36,16 @@ const currentUser = user.value;
 
     <div class="flex flex-col gap-5 items-center">
       <h1 class="text-[#B9FC6E] text-2xl font-montserrat">
-        Books read:
-        <span class="text-white"> 7</span>
-      </h1>
-      <h1 class="text-[#B9FC6E] text-2xl font-montserrat">
         Bookmarked:
         <span class="text-white"> 3</span>
       </h1>
       <h1 class="text-[#B9FC6E] text-2xl font-montserrat">
         Favorites:
         <span class="text-white"> 15</span>
+      </h1>
+      <h1 class="text-[#B9FC6E] text-2xl font-montserrat">
+        Books read:
+        <span class="text-white"> 7</span>
       </h1>
     </div>
   </section>
