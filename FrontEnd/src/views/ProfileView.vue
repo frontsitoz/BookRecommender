@@ -1,7 +1,7 @@
 <script setup>
 import { useMiddleware } from "@/helpers/useMiddleware";
-import ProfileLeftSidebar from "../components/ProfileLeftSidebar.vue";
-import ProfileDetails from "../components/ProfileDetails.vue";
+import ProfileLeftSidebar from "../components/profile/ProfileLeftSidebar.vue";
+import ProfileDetails from "../components/profile/ProfileDetails.vue";
 import { useAuth } from "vue-clerk";
 
 const { isSignedIn } = useAuth();
