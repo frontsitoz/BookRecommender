@@ -29,6 +29,6 @@ import ProfileCategory from "./ProfileCategory.vue";
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Color de la barra de desplazamiento al pasar el mouse */
+  background: #5b8333; /* Color de la barra de desplazamiento al pasar el mouse */
 }
 </style>
