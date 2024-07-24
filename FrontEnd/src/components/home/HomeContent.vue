@@ -9,7 +9,7 @@ const cards = [
 
 <template>
   <section
-    class="grid max-lg:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6 place-items-center px-10 py-10 gap-7 w-full h-full overflow-scroll custom-scrollbar"
+    class="grid max-lg:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-7 place-items-center px-10 py-10 gap-10 w-full h-full overflow-scroll custom-scrollbar"
   >
     <BookCard v-for="(card, index) in cards" :key="index" />
   </section>
