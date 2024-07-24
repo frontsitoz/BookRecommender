@@ -7,8 +7,13 @@
       alt="book_portrait"
       class="w-full h-64 object-cover rounded-md mb-4"
     />
-    <h3 class="text-white text-lg line-clamp-2 font-bold font-castoro w-full">
+    <h3
+      class="text-white text-lg line-clamp-2 font-bold font-castoro w-full mb-3"
+    >
       Perdí un planeta y gane un hogar
     </h3>
+    <p class="text-white text-xs font-montserrat w-full line-clamp-1">
+      Una novela de Kate Johnson
+    </p>
   </div>
 </template>
