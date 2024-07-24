@@ -4,7 +4,7 @@ import BookCard from "../shared/BookCard.vue";
 
 const props = defineProps(["title"]);
 
-const cards = [1, 2, 3, 4];
+const cards = [1, 2, 3, 4, 5, 6, 7];
 </script>
 
 <template>
