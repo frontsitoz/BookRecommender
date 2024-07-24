@@ -1,6 +1,48 @@
 <script setup>
 import { RouterLink } from "vue-router";
 import { SignedIn, SignedOut, UserButton } from "vue-clerk";
+
+const appearance = {
+  variables: {
+    colorBackground: "#1A3E30",
+    colorPrimary: "#2e026d",
+    colorText: "#ffffff",
+    borderRadius: "8px",
+  },
+  elements: {
+    userButton: {
+      backgroundColor: "#060815",
+      color: "#ffffff",
+      borderRadius: "8px",
+      padding: "10px",
+      "&:hover": {
+        backgroundColor: "#240158",
+      },
+    },
+    userProfile: {
+      backgroundColor: "#060815",
+      borderRadius: "8px",
+    },
+    card: {
+      backgroundColor: "#060815",
+      borderRadius: "8px",
+    },
+    inputField: {
+      borderRadius: "8px",
+      backgroundColor: "#1e1e2e",
+      color: "#ffffff",
+    },
+    labelText: {
+      color: "#ffffff",
+    },
+    userButtonPopoverActionButton: {
+      color: "#ffffff",
+    },
+    userButtonPopoverActionButtonHover: {
+      backgroundColor: "#240158",
+    },
+  },
+};
 </script>
 
 <template>
@@ -15,7 +57,6 @@ import { SignedIn, SignedOut, UserButton } from "vue-clerk";
           width="180"
         />
       </div>
-
       <nav class="flex items-center gap-10 text-xl font-semibold">
         <SignedOut>
           <RouterLink
@@ -29,14 +70,13 @@ import { SignedIn, SignedOut, UserButton } from "vue-clerk";
             >SignUp</RouterLink
           >
         </SignedOut>
-
         <SignedIn>
           <RouterLink
             to="/profile"
             class="font-castoro text-[22px] text-white hover:text-[#b5b5b5]"
             >Profile</RouterLink
           >
-          <UserButton after-sign-out-url="/sign-in" />
+          <UserButton after-sign-out-url="/sign-in" :appearance="appearance" />
         </SignedIn>
       </nav>
     </div>
