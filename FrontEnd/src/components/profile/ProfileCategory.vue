@@ -1,6 +1,6 @@
 <script setup>
 import { defineProps } from "vue";
-import BookCard from "./BookCard.vue";
+import BookCard from "../shared/BookCard.vue";
 
 const props = defineProps(["title"]);
 

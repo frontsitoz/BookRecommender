@@ -12,7 +12,7 @@ import { RouterLink } from "vue-router";
         <div class="flex gap-2">
           <p class="text-2xl font-castoro">New</p>
           <img
-            src="../assets/images/star-icon.svg"
+            src="@/assets/images/star-icon.svg"
             alt="category_icon"
             width="20"
             height="20"
@@ -20,7 +20,7 @@ import { RouterLink } from "vue-router";
           />
         </div>
         <img
-          src="../assets/images/dropdown-arrow.svg"
+          src="@/assets/images/dropdown-arrow.svg"
           alt="dropdown_arrow"
           width="30"
           height="30"
@@ -35,7 +35,7 @@ import { RouterLink } from "vue-router";
         <div class="flex gap-2">
           <p class="text-2xl font-castoro">Hot</p>
           <img
-            src="../assets/images/flame-icon.svg"
+            src="@/assets/images/flame-icon.svg"
             alt="category_icon"
             width="20"
             height="20"
@@ -43,7 +43,7 @@ import { RouterLink } from "vue-router";
           />
         </div>
         <img
-          src="../assets/images/dropdown-arrow.svg"
+          src="@/assets/images/dropdown-arrow.svg"
           alt="dropdown_arrow"
           width="30"
           height="30"
@@ -58,7 +58,7 @@ import { RouterLink } from "vue-router";
         <div class="flex gap-2">
           <p class="text-2xl font-castoro">Categories</p>
           <img
-            src="../assets/images/category-icon.svg"
+            src="@/assets/images/category-icon.svg"
             alt="category_icon"
             width="20"
             height="20"
@@ -66,7 +66,7 @@ import { RouterLink } from "vue-router";
           />
         </div>
         <img
-          src="../assets/images/dropdown-arrow.svg"
+          src="@/assets/images/dropdown-arrow.svg"
           alt="dropdown_arrow"
           width="30"
           height="30"

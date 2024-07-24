@@ -1,7 +1,7 @@
 <script setup>
 import { useAuth } from "vue-clerk";
 import { useMiddleware } from "@/helpers/useMiddleware";
-import HomeLeftSidebar from "../components/HomeLeftSidebar.vue";
+import HomeLeftSidebar from "../components/home/HomeLeftSidebar.vue";
 
 const { isSignedIn } = useAuth();
 

@@ -19,7 +19,7 @@ const currentUser = user.value;
         class="rounded-full mb-7 shadow-[0_0_15px] shadow-[#B9FC6E]"
       />
       <img
-        src="../assets/images/inkradar-member-logo.svg"
+        src="@/assets/images/inkradar-member-logo.svg"
         alt="member-img"
         width="200"
         class="mb-5"
