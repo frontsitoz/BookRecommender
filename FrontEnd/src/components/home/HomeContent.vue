@@ -25,8 +25,9 @@ const cards = [
         Here are some books we picked up just for you:
       </p>
     </div>
+
     <div
-      class="grid max-lg:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-7 place-items-center px-10 py-10 gap-10 w-full h-full"
+      class="grid max-lg:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-7 place-items-center px-10 py-10 gap-10 w-full h-auto"
     >
       <BookCard v-for="(card, index) in cards" :key="index" />
     </div>
