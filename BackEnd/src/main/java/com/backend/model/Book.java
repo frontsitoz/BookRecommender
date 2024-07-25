@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 
 @Data
 @NoArgsConstructor
@@ -22,32 +25,24 @@ public class Book {
     private String title;
 
     @Column(length = 255)
-    private String subtitle;
-
-    @Column(length = 255)
-    private String authors;
-
-    @Column(length = 255)
-    private String publisher;
-
-    @Column(length = 10)
-    private String publishedDate;
-
-    @Column(length = 2000)
     private String description;
 
+    @Column(length = 255)
+    private String genre;
+
+    @Column
+    private Float averageRating;
+
     @Column(nullable = false)
-    private Integer pageCount;
+    private LocalDateTime createdAt;
 
-    @Column(length = 10)
-    private String language;
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    private List<Rating> ratings;
 
-    @Column(length = 255)
-    private String previewLink;
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    private List<Reading> readings;
 
-    @Column(length = 255)
-    private String infoLink;
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    private List<Recommendation> recommendations;
 
-    @Column(length = 255)
-    private String thumbnailLink;
 }
