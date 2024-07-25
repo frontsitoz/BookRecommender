@@ -1,6 +1,10 @@
 <script setup>
 import { RouterLink } from "vue-router";
 import { SignedIn, SignedOut, UserButton } from "vue-clerk";
+import { useAuth } from "vue-clerk";
+
+const { isSignedIn } = useAuth();
+const signedIn = isSignedIn.value;
 
 const appearance = {
   variables: {
@@ -50,7 +54,7 @@ const appearance = {
     class="relative bg-[#060815] px-36 z-50 border-b-[0.5px] border-[#a5fe52]"
   >
     <div class="flex justify-between items-center h-20 w-full">
-      <div @click="$router.push('/')" class="cursor-pointer">
+      <div @click="signedIn && $router.push('/')" class="cursor-pointer">
         <img
           src="@/assets/images/inkradar-white-logo.svg"
           alt="logo"
