@@ -12,9 +12,9 @@ import {
 
 <template>
   <Dialog>
-    <DialogTrigger>
+    <DialogTrigger as-child>
       <div
-        class="flex flex-col px-5 py-4 w-60 h-[400px] rounded-lg bg-[#0A0C15]"
+        class="flex flex-col px-5 py-4 w-60 h-[400px] rounded-lg bg-[#0A0C15] cursor-pointer"
       >
         <img
           src="../../assets/images/book_portrait_demo.jpeg"
@@ -34,15 +34,53 @@ import {
         </h5>
       </div>
     </DialogTrigger>
-    <DialogContent>
-      <DialogHeader>
-        <DialogTitle>Edit profile</DialogTitle>
-        <DialogDescription>
-          Make changes to your profile here. Click save when you're done.
-        </DialogDescription>
+    <DialogContent
+      class="max-w-[60%] flex flex-col gap-10 px-20 py-12 bg-[#0A0C15]"
+    >
+      <DialogHeader class="flex flex-col items-center gap-14">
+        <DialogTitle
+          class="text-white max-w-[500px] text-4xl font-normal text-center font-castoro w-full"
+          >Perdí un planeta y gane un hogar</DialogTitle
+        >
+        <div class="w-full h-auto flex">
+          <img
+            src="../../assets/images/book_portrait_demo.jpeg"
+            alt="book_portrait"
+            class="w-72 object-cover rounded-lg"
+          />
+
+          <div class="size-full text-white px-10 flex flex-col gap-10">
+            <div class="w-full flex gap-5">
+              <h3 class="text-xl font-castoro font-bold">Author:</h3>
+              <p class="font-montserrat text-base">Katie Johnson</p>
+            </div>
+
+            <div class="w-full flex gap-5">
+              <h3 class="text-xl font-castoro font-bold">Release Date:</h3>
+              <p class="font-montserrat text-base">February 21st of 2021</p>
+            </div>
+
+            <div class="w-full flex gap-5">
+              <h3 class="text-xl font-castoro font-bold">Author:</h3>
+              <p class="font-montserrat text-base">Katie Johnson</p>
+            </div>
+
+            <div class="w-full flex gap-5">
+              <h3 class="text-xl font-castoro font-bold">Author:</h3>
+              <p class="font-montserrat text-base">Katie Johnson</p>
+            </div>
+
+            <div class="w-full flex gap-5">
+              <h3 class="text-xl font-castoro font-bold">Author:</h3>
+              <p class="font-montserrat text-base">Katie Johnson</p>
+            </div>
+          </div>
+        </div>
       </DialogHeader>
 
-      <DialogFooter> Save changes </DialogFooter>
+      <DialogDescription>
+        Make changes to your profile here. Click save when you're done.
+      </DialogDescription>
     </DialogContent>
   </Dialog>
 </template>
