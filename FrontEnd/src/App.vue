@@ -6,13 +6,13 @@ import Navbar from "./components/shared/Navbar.vue";
 
 <template>
   <section class="min-h-screen overflow-hidden">
-    <Navbar />
+    <ClerkLoaded>
+      <Navbar />
 
-    <main class="flex items-center justify-center min-h-[calc(100vh-80px)]">
-      <ClerkLoaded>
+      <main class="flex items-center justify-center min-h-[calc(100vh-80px)]">
         <RouterView />
-      </ClerkLoaded>
-    </main>
+      </main>
+    </ClerkLoaded>
   </section>
 </template>
 
