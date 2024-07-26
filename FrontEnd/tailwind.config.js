@@ -5,7 +5,7 @@ export default {
     extend: {
       fontFamily: {
         castoro: ["Castoro", "serif"],
-        montserrat: ["Montserrat", "serif"],
+        montserrat: ["Montserrat", "sans-serif"],
       },
     },
   },
