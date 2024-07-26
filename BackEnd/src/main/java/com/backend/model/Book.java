@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,14 +22,19 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 255)
+    @Column(length = 255)
     private String title;
+
+    @Column(length = 255)
+
+    @ElementCollection
+    private List<String> authors = new ArrayList<>();
 
     @Column(length = 255)
     private String description;
 
-    @Column(length = 255)
-    private String genre;
+    @ElementCollection
+    private List<String> genre = new ArrayList<>();
 
     @Column
     private Float averageRating;

@@ -2,12 +2,9 @@ package com.backend.controller;
 
 
 import com.backend.model.Book;
-import com.backend.repository.IUserRepo;
 import com.backend.service.IBookService;
-import com.backend.service.ICRUD;
-import com.backend.service.IUserService;
+import com.backend.service.api.GoogleBooksClient;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +19,13 @@ import java.lang.reflect.InvocationTargetException;
 public class BookController {
 
     private final IBookService bookService;
+
+    private final GoogleBooksClient googleBooksClient;
+
+    @GetMapping("/searchBooks")
+    public void searchBooks(@RequestParam String query) {
+        googleBooksClient.searchAndPrintBooks(query);
+    }
 
     @GetMapping
     public ResponseEntity<Page<Book>> findAll(Pageable pageable) {
