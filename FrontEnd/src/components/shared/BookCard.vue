@@ -3,7 +3,6 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -35,7 +34,7 @@ import {
       </div>
     </DialogTrigger>
     <DialogContent
-      class="max-w-[55%] flex flex-col gap-4 px-16 py-8 bg-[#0A0C15]"
+      class="max-w-[840px] flex flex-col gap-4 px-16 py-8 bg-[#0A0C15]"
     >
       <DialogHeader class="flex flex-col items-center">
         <DialogTitle
@@ -90,13 +89,13 @@ import {
 
               <img
                 src="@/assets/images/bookmark-icon.svg"
-                alt="star"
+                alt="bookmark"
                 class="h-full invert cursor-pointer"
               />
 
               <img
                 src="@/assets/images/book-open-icon.svg"
-                alt="star"
+                alt="open_book"
                 class="h-full invert cursor-pointer"
               />
             </div>
@@ -104,7 +103,7 @@ import {
         </div>
       </DialogHeader>
 
-      <DialogDescription class="w-full max-h-64 flex flex-col gap-2">
+      <DialogDescription class="w-full max-h-60 flex flex-col gap-2">
         <h1 class="w-full h-auto text-white font-bold font-castoro text-xl">
           Description:
         </h1>
