@@ -7,6 +7,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { ref } from "vue";
+
+const dialogContentClass = ref(
+  "max-w-[840px] flex flex-col gap-4 px-16 py-8 bg-[#0A0C15] overflow-scroll custom-scrollbar"
+);
 </script>
 
 <template>
@@ -33,9 +38,7 @@ import {
         </h5>
       </div>
     </DialogTrigger>
-    <DialogContent
-      class="max-w-[840px] flex flex-col gap-4 px-16 py-8 bg-[#0A0C15]"
-    >
+    <DialogContent :class="dialogContentClass">
       <DialogHeader class="flex flex-col items-center">
         <DialogTitle
           class="text-white max-w-[500px] text-4xl font-normal text-center pb-7 font-castoro w-full border-b border-[#9BFE48]"
@@ -107,9 +110,7 @@ import {
         <h1 class="w-full h-auto text-white font-bold font-castoro text-xl">
           Description:
         </h1>
-        <p
-          class="text-white font-montserrat text-base overflow-scroll custom-scrollbar"
-        >
+        <p class="text-white font-montserrat text-base">
           Lorem ipsum dolor sit amet consectetur adipiscing elit sagittis, orci
           curae laoreet cursus eros rhoncus inceptos nostra, montes nisi quam
           libero sociosqu tellus faucibus et, ullamcorper dis elementum varius
@@ -132,23 +133,51 @@ import {
   </Dialog>
 </template>
 
-<style scoped>
-/* Personalizar la barra de desplazamiento */
+<style>
+/* Personalizar la barra de desplazamiento para el componente DialogContent */
 .custom-scrollbar::-webkit-scrollbar {
-  width: 1px; /* Ancho de la barra de desplazamiento */
-  height: 100%; /* Altura de la barra de desplazamiento */
+  width: 2px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: #0d0f15; /* Fondo de la pista de desplazamiento */
+  background: transparent;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #b0fc63; /* Color de la barra de desplazamiento */
-  border-radius: 10px; /* Opcional: redondear la barra de desplazamiento */
+  background: #b0fc63;
+  border-radius: 10px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #5b8333; /* Color de la barra de desplazamiento al pasar el mouse */
+  background: #5b8333;
+}
+
+/* Estilos para navegadores Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #b0fc63 transparent;
+}
+
+/* Estilos específicos para el componente DialogContent */
+:deep(.dialog-content) {
+  scrollbar-width: thin;
+  scrollbar-color: #b0fc63 transparent;
+}
+
+:deep(.dialog-content)::-webkit-scrollbar {
+  width: 2px;
+}
+
+:deep(.dialog-content)::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+:deep(.dialog-content)::-webkit-scrollbar-thumb {
+  background: #b0fc63;
+  border-radius: 10px;
+}
+
+:deep(.dialog-content)::-webkit-scrollbar-thumb:hover {
+  background: #5b8333;
 }
 </style>
