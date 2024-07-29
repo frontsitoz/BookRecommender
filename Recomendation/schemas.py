@@ -1,0 +1,1 @@
+# Esquemas de datos para entrada y salida de API

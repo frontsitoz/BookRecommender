@@ -10,7 +10,13 @@
   },
   "dependencies": {
     "@clerk/themes": "^2.1.12",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "lucide-vue-next": "^0.416.0",
     "pinia": "^2.1.7",
+    "radix-vue": "^1.9.2",
+    "tailwind-merge": "^2.4.0",
+    "tailwindcss-animate": "^1.0.7",
     "vue": "^3.4.29",
     "vue-clerk": "^0.4.10",
     "vue-router": "^4.3.3"
