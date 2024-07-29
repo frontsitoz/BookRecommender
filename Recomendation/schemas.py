@@ -15,9 +15,6 @@ class Book(BaseModel):
     similar_books: List[int] = [] #Ids de libros similares que el usuario no ha leido
     interested : bool = False #Indicador si el libro esta marcado como me interesa o no 
 
-class User(BaseModel):
-    id:int 
-    user_books: List[Book]
 
 
 
