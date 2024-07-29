@@ -2,9 +2,9 @@
 import SidebarItem from "./SidebarItem.vue";
 
 // Importar las imágenes
-import starIcon from "@/assets/images/star-icon.svg";
-import flameIcon from "@/assets/images/flame-icon.svg";
-import categoryIcon from "@/assets/images/category-icon.svg";
+import starIcon from "/images/star-icon.svg";
+import flameIcon from "/images/flame-icon.svg";
+import categoryIcon from "/images/category-icon.svg";
 </script>
 
 <template>

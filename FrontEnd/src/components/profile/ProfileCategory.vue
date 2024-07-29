@@ -1,10 +1,9 @@
 <script setup>
 import { defineProps } from "vue";
 import BookCard from "../shared/BookCard.vue";
+import { books } from "@/constants";
 
 const props = defineProps(["title"]);
-
-const cards = [1, 2, 3, 4, 5, 6, 7];
 </script>
 
 <template>
@@ -13,7 +12,7 @@ const cards = [1, 2, 3, 4, 5, 6, 7];
     <div
       class="grid max-lg:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-7 place-items-center w-full h-auto"
     >
-      <BookCard v-for="(card, index) in cards" :key="index" />
+      <BookCard v-for="book in books" :key="book.id" :book="book" />
     </div>
   </article>
 </template>
