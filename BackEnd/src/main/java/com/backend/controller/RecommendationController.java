@@ -1,14 +1,19 @@
 package com.backend.controller;
 
 import com.backend.model.Recommendation;
+import com.backend.model.DTO.RecommendationDto;
+import com.backend.model.Recommendation;
 import com.backend.service.IRecommendationService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/recommendations")
@@ -17,10 +22,13 @@ public class RecommendationController {
 
     private final IRecommendationService recommendationService;
 
+    @Qualifier("defaultMapper")
+    private final ModelMapper mapper;
+
     @GetMapping
-    public ResponseEntity<Page<Recommendation>> findAll(Pageable pageable) {
-        Page<Recommendation> recommendations = recommendationService.findAll(pageable);
-        return ResponseEntity.ok(recommendations);
+    public ResponseEntity<List<Recommendation>> findAll() {
+        List<Recommendation> recommendations = recommendationService.findAll();
+        return ResponseEntity.ok(List.of());
     }
 
     @GetMapping("/{id}")
@@ -51,5 +59,14 @@ public class RecommendationController {
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         recommendationService.deleteById(id);
         return ResponseEntity.ok().build();
+    }
+
+    /////////////////////////////////////
+    private RecommendationDto convertToDto(Recommendation obj){
+        return mapper.map(obj, RecommendationDto.class);
+    }
+
+    private Recommendation convertToEntity(RecommendationDto dto){
+        return mapper.map(dto, Recommendation.class);
     }
 }

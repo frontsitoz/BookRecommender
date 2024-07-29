@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 public class RecommendationDto {
 
     private Long id;
-    private Long userId;
-    private Long bookId;
+    private UserDto userId;
+    private BookDto bookId;
     private String recommendationText;
     private LocalDateTime recommendedAt;
 }

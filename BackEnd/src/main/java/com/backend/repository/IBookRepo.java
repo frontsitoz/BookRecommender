@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface IBookRepo extends IGenericRepo<Book, Long>{
 
-    List<Book> findAllByReadings(Long userId);
+//    List<Book> findAllByReadings(Long userId);
 }

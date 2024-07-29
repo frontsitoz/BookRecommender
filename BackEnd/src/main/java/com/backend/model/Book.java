@@ -1,14 +1,13 @@
 package com.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +16,13 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 
-@Table(name = "books")
+@Table(name = "book")
 @Entity
 public class Book {
 
+    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,14 +30,14 @@ public class Book {
     @Column(length = 255)
     private String title;
 
-    @ElementCollection
-    private List<String> authors = new ArrayList<>();
+    @Column(columnDefinition = "TEXT", nullable = false)
+    private String authors;
 
-    @Column(length = 255)
+    @Column(columnDefinition = "TEXT")
     private String description;
 
-    @ElementCollection
-    private List<String> genre = new ArrayList<>();
+    @Column(columnDefinition = "TEXT", nullable = false)
+    private String genre;
 
     @Column(length = 255)
     private String publisher;
@@ -50,11 +51,21 @@ public class Book {
     @Column(nullable = false)
     private Double pageCount;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private Boolean isBookMarked;
 
-    @OneToMany(mappedBy = "book")
-//    @JsonManagedReference("book-readings")
-    private List<Reading> readings;
+    @Column(nullable = false)
+    private Boolean isRead;
+
+//    @Column(nullable = false)
+    private Boolean isReading;
+
+//    @Column(nullable = false)
+    private Boolean isLiked;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user", nullable = false)
+    @JsonIgnore
+    private User user;
 
 }

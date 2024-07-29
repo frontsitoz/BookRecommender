@@ -2,11 +2,15 @@ package com.backend.controller;
 
 
 import com.backend.model.Book;
+import com.backend.model.DTO.BookDto;
 import com.backend.service.IBookService;
 import com.backend.service.api.GoogleBooksClient;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,16 +25,20 @@ public class BookController {
 
     private final IBookService bookService;
 
+    @Qualifier("defaultMapper")
+    private final ModelMapper mapper;
+
     private final GoogleBooksClient googleBooksClient;
 
     @GetMapping("/searchBooks")
-    public ResponseEntity<List<Book>> searchBooks(@RequestParam String query) {
-        return ResponseEntity.ok().body(googleBooksClient.searchAndPrintBooks(query));
+    public ResponseEntity<List<BookDto>> searchBooks(@RequestParam String query) {
+        List<BookDto> list = googleBooksClient.searchAndPrintBooks(query).stream().map(this::convertToDto).toList();
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<Page<Book>> findAll(Pageable pageable) {
-        Page<Book> books = bookService.findAll(pageable);
+    public ResponseEntity<List<Book>> findAll() {
+        List<Book> books = bookService.findAll();
         return ResponseEntity.ok(books);
     }
 
@@ -41,9 +49,9 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<Book> save(@RequestBody Book book) {
-        Book savedBook = bookService.save(book);
-        return ResponseEntity.ok(savedBook);
+    public ResponseEntity<BookDto> save(@RequestBody BookDto book) {
+        Book savedBook = bookService.save(convertToEntity(book));
+        return ResponseEntity.ok(convertToDto(savedBook));
     }
 
     @PostMapping("/favorite")
@@ -64,4 +72,14 @@ public class BookController {
         bookService.deleteById(id);
         return ResponseEntity.ok().build();
     }
+
+    /////////////////////////////////////
+    private BookDto convertToDto(Book obj){
+        return mapper.map(obj, BookDto.class);
+    }
+
+    private Book convertToEntity(BookDto dto){
+        return mapper.map(dto, Book.class);
+    }
+
 }

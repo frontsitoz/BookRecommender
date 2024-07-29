@@ -1,15 +1,19 @@
 package com.backend.controller;
 
 
+import com.backend.model.DTO.UserDto;
 import com.backend.model.User;
 import com.backend.service.IUserService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/users")
@@ -19,10 +23,15 @@ public class UserController {
 
     private final IUserService userService;
 
+    @Qualifier("defaultMapper")
+    private final ModelMapper mapper;
+
     @GetMapping
-    public ResponseEntity<Page<User>> findAll(Pageable pageable) {
-        Page<User> users = userService.findAll(pageable);
-        return ResponseEntity.ok(users);
+    public ResponseEntity<List<UserDto>> findAll() {
+
+        List<User> users = userService.findAll();
+        List<UserDto> dtos = users.stream().map(this::convertToDto).toList();
+        return ResponseEntity.ok(dtos);
     }
 
     @GetMapping("/{id}")
@@ -32,9 +41,10 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> save(@RequestBody User user) {
-        User savedUser = userService.save(user);
-        return ResponseEntity.ok(savedUser);
+    public ResponseEntity<UserDto> save(@RequestBody UserDto user) {
+        User savedUser = userService.save(convertToEntity(user));
+        UserDto dto = convertToDto(savedUser);
+        return ResponseEntity.ok(dto);
     }
 
     @PostMapping("/favorite")
@@ -53,5 +63,14 @@ public class UserController {
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         userService.deleteById(id);
         return ResponseEntity.ok().build();
+    }
+
+    /////////////////////////////////////
+    private UserDto convertToDto(User obj){
+        return mapper.map(obj, UserDto.class);
+    }
+
+    private User convertToEntity(UserDto dto){
+        return mapper.map(dto, User.class);
     }
 }

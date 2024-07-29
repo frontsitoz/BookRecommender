@@ -8,15 +8,16 @@ import org.springframework.data.domain.Pageable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 public abstract class CRUDImpl <T, ID> implements ICRUD<T, ID> {
 
     public abstract IGenericRepo<T, ID> getRepo();
 
     @Override
-    public Page<T> findAll(Pageable pageable) {
+    public List<T> findAll() {
 
-        return getRepo().findAll(pageable);
+        return getRepo().findAll();
     }
 
     @Override

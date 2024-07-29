@@ -72,8 +72,8 @@ public class GoogleBooksClient {
                 //Creating a new book object
                 Book book = new Book();
                 book.setTitle(title);
-                book.setAuthors(authors);
-                book.setGenre(category);
+                book.setAuthors(authors.toString());
+                book.setGenre(category.toString());
                 book.setIsBookMarked(true);
                 book.setPageCount(pageCount);
                 book.setImageUrl(thumbnail);
