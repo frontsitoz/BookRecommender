@@ -1,20 +1,16 @@
 from typing import List, Optional, Dict
 from schemas import Book
-
-
 from typing import List
 
 
-def generate_recommendations(user_books: List[Book], all_books: List[Book], top_n: int = 10) -> List[Book]:
+def generate_recommendations(user_books: List[Book], all_books: List[Book], top_n: int = 5) -> List[Book]:
     # Creamos la lista de libros que el usuario a leido
     read_books = [book for book in user_books if book.read]
     
     # Identificamos los libros mejor valorados que el usuario ha leído
-    best_rated_books = sorted(
-        [book for book in read_books if book.interested], 
-        key=lambda x: x.average_rating, 
-        reverse=True
-    )
+    interested_books = [book for book in read_books if book.interested]
+    best_rated_books = sorted(interested_books,key=lambda x:x.average_raiting,reverse=True)
+   
     
     # Filtramos libros similares no leídos
     recommended_books = []
@@ -25,9 +21,9 @@ def generate_recommendations(user_books: List[Book], all_books: List[Book], top_
                 recommended_books.append(similar_book)
     
     # Filtramos libros no deseados
-    recommended_books = [book for book in recommended_books if not book.interested]
+    # recommended_books = [book for book in recommended_books if not book.interested] #esta parte no va por que al inicio ya se filtro los libros por interesados
     
-    # Ordenar por calificación promedio y devolver los top_n
+    # Ordenar por calificación promedio y devolver los top_n que serian el numero de libros a recomendar
     recommended_books.sort(key=lambda x: x.average_rating, reverse=True)
     top_recommendations = recommended_books[:top_n]
     
