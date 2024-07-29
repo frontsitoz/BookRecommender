@@ -1,5 +1,9 @@
 package com.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,8 +29,6 @@ public class Book {
     @Column(length = 255)
     private String title;
 
-    @Column(length = 255)
-
     @ElementCollection
     private List<String> authors = new ArrayList<>();
 
@@ -36,19 +38,23 @@ public class Book {
     @ElementCollection
     private List<String> genre = new ArrayList<>();
 
-    @Column
-    private Float averageRating;
+    @Column(length = 255)
+    private String publisher;
+
+    @Column(length = 255)
+    private String publishedDate;
+
+    @Column(length = 255)
+    private String imageUrl;
 
     @Column(nullable = false)
-    private LocalDateTime createdAt;
+    private Double pageCount;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    private List<Rating> ratings;
+    @Column(nullable = false)
+    private Boolean isBookMarked;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "book")
+//    @JsonManagedReference("book-readings")
     private List<Reading> readings;
-
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    private List<Recommendation> recommendations;
 
 }

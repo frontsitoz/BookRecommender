@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/books")
@@ -23,8 +24,8 @@ public class BookController {
     private final GoogleBooksClient googleBooksClient;
 
     @GetMapping("/searchBooks")
-    public void searchBooks(@RequestParam String query) {
-        googleBooksClient.searchAndPrintBooks(query);
+    public ResponseEntity<List<Book>> searchBooks(@RequestParam String query) {
+        return ResponseEntity.ok().body(googleBooksClient.searchAndPrintBooks(query));
     }
 
     @GetMapping
@@ -41,6 +42,13 @@ public class BookController {
 
     @PostMapping
     public ResponseEntity<Book> save(@RequestBody Book book) {
+        Book savedBook = bookService.save(book);
+        return ResponseEntity.ok(savedBook);
+    }
+
+    @PostMapping("/favorite")
+    public ResponseEntity<Book> saveFavoriteBook(@RequestBody Book book) {
+        book.setIsBookMarked(true);
         Book savedBook = bookService.save(book);
         return ResponseEntity.ok(savedBook);
     }

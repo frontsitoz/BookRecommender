@@ -19,13 +19,13 @@ public class Rating {
     @Column(nullable = false, length = 255)
     private String comment;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "book_id", nullable = false)
-    private Book book;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id", nullable = false)
+//    private User user;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "book_id", nullable = false)
+//    private Book book;
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
