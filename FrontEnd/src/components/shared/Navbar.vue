@@ -55,11 +55,7 @@ const appearance = {
   >
     <div class="flex justify-between items-center h-20 w-full">
       <div @click="signedIn && $router.push('/')" class="cursor-pointer">
-        <img
-          src="@/assets/images/inkradar-white-logo.svg"
-          alt="logo"
-          width="180"
-        />
+        <img src="/images/inkradar-white-logo.svg" alt="logo" width="180" />
       </div>
       <nav class="flex items-center gap-10 text-xl font-semibold">
         <SignedOut>

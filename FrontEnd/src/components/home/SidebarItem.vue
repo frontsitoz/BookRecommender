@@ -21,7 +21,7 @@ const props = defineProps(["title", "iconUrl"]);
       />
     </div>
     <img
-      src="@/assets/images/dropdown-arrow.svg"
+      src="/images/dropdown-arrow.svg"
       alt="dropdown_arrow"
       width="30"
       height="30"

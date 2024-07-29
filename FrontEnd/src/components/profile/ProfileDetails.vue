@@ -1,14 +1,15 @@
 <script setup>
 import ProfileCategory from "./ProfileCategory.vue";
+import { books } from "@/constants";
 </script>
 
 <template>
   <section
     class="flex flex-col gap-14 w-full max-h-full overflow-scroll custom-scrollbar"
   >
-    <ProfileCategory title="Bookmarked" />
-    <ProfileCategory title="Favorites" />
-    <ProfileCategory title="Books Read" />
+    <ProfileCategory type="bookmarked" :books="books" />
+    <ProfileCategory type="favorites" :books="books" />
+    <ProfileCategory type="books-read" :books="books" />
   </section>
 </template>
 
