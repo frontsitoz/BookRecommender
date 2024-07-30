@@ -38,10 +38,10 @@ const dialogContentClass = ref(
           {{ book.title }}
         </h3>
         <p class="text-white text-xs font-montserrat w-full line-clamp-1 mb-2">
-          {{ book.authors }}
+          {{ book.authors.replace(/^\[|\]$/g, "") }}
         </p>
         <h5 class="w-full line-clamp-1 text-[#35c068] font-montserrat text-sm">
-          {{ book.genre }}
+          {{ book.genre.replace(/^\[|\]$/g, "") }}
         </h5>
       </div>
     </DialogTrigger>
