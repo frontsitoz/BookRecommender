@@ -16,7 +16,7 @@ import java.util.List;
 
 public class UserDto {
 
-    private Long id;
+    private Long idUser;
     private String username;
 
     private String passwordHash;

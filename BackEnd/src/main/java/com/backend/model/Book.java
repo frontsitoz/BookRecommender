@@ -25,7 +25,7 @@ public class Book {
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idBook;
 
     @Column(length = 255)
     private String title;

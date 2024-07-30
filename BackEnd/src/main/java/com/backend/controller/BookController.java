@@ -63,7 +63,7 @@ public class BookController {
             Book savedBook = bookService.save(convertToEntity(book));
             return ResponseEntity.ok(convertToDto(savedBook));
         } else {
-            throw new RuntimeException("Book already exists for the user.");
+            return ResponseEntity.badRequest().build();
         }
     }
 
@@ -74,10 +74,10 @@ public class BookController {
         return ResponseEntity.ok(savedBook);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Book> update(@RequestBody Book book, @PathVariable Long id) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Book updatedBook = bookService.update(book, id);
-        return ResponseEntity.ok(updatedBook);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<BookDto> update(@RequestBody BookDto book, @PathVariable Long id) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Book updatedBook = bookService.update(convertToEntity(book), id);
+        return ResponseEntity.ok(convertToDto(updatedBook));
     }
 
     @DeleteMapping("/{id}")
