@@ -38,10 +38,10 @@ const dialogContentClass = ref(
           {{ book.title }}
         </h3>
         <p class="text-white text-xs font-montserrat w-full line-clamp-1 mb-2">
-          {{ book.author }}
+          {{ book.authors }}
         </p>
         <h5 class="w-full line-clamp-1 text-[#35c068] font-montserrat text-sm">
-          {{ book.category }}
+          {{ book.genre }}
         </h5>
       </div>
     </DialogTrigger>
@@ -64,12 +64,14 @@ const dialogContentClass = ref(
             <div class="flex flex-col gap-10 text-white">
               <div class="w-full flex gap-5">
                 <h3 class="text-xl font-castoro font-bold">Author:</h3>
-                <p class="font-montserrat text-base">{{ book.author }}</p>
+                <p class="font-montserrat text-base">{{ book.authors }}</p>
               </div>
 
               <div class="w-full flex gap-5">
                 <h3 class="text-xl font-castoro font-bold">Release Date:</h3>
-                <p class="font-montserrat text-base">{{ book.publishDate }}</p>
+                <p class="font-montserrat text-base">
+                  {{ book.publishedDate }}
+                </p>
               </div>
 
               <div class="w-full flex gap-5">
@@ -86,7 +88,7 @@ const dialogContentClass = ref(
 
               <div class="w-full flex gap-5">
                 <h3 class="text-xl font-castoro font-bold">Category:</h3>
-                <p class="font-montserrat text-base">{{ book.category }}</p>
+                <p class="font-montserrat text-base">{{ book.genre }}</p>
               </div>
             </div>
 
