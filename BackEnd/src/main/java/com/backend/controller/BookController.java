@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/books")
@@ -56,10 +57,14 @@ public class BookController {
         return ResponseEntity.ok(book);
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<BookDto> save(@RequestBody BookDto book) {
-        Book savedBook = bookService.save(convertToEntity(book));
-        return ResponseEntity.ok(convertToDto(savedBook));
+        if (!isBookAlreadySaved(book.getTitle(), book.getPageCount(), book.getAuthors())) {
+            Book savedBook = bookService.save(convertToEntity(book));
+            return ResponseEntity.ok(convertToDto(savedBook));
+        } else {
+            throw new RuntimeException("Book already exists for the user.");
+        }
     }
 
     @PostMapping("/favorite")
@@ -82,12 +87,16 @@ public class BookController {
     }
 
     /////////////////////////////////////
-    private BookDto convertToDto(Book obj){
+    private BookDto convertToDto(Book obj) {
         return mapper.map(obj, BookDto.class);
     }
 
-    private Book convertToEntity(BookDto dto){
+    private Book convertToEntity(BookDto dto) {
         return mapper.map(dto, Book.class);
     }
 
+    public boolean isBookAlreadySaved(String title, Double pageCount, String authors) {
+        Optional<Book> existingBook = bookService.findByTitleAndPageCountAndAuthors(title, pageCount, authors);
+        return existingBook.isPresent();
+    }
 }
