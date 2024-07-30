@@ -4,6 +4,8 @@ package com.backend.controller;
 import com.backend.model.DTO.UserDto;
 import com.backend.model.User;
 import com.backend.service.IUserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+@Tag(name = "User", description = "Users API")
 @RestController
 @RequestMapping("api/users")
 
@@ -26,7 +29,11 @@ public class UserController {
     @Qualifier("defaultMapper")
     private final ModelMapper mapper;
 
-    @GetMapping
+    @Operation(
+            summary = "Get users",
+            description = "Get users of the BD"
+    )
+    @GetMapping("/findAll")
     public ResponseEntity<List<UserDto>> findAll() {
 
         List<User> users = userService.findAll();
@@ -34,25 +41,38 @@ public class UserController {
         return ResponseEntity.ok(dtos);
     }
 
-    @GetMapping("/{id}")
+    @Operation(
+            summary = "Get users",
+            description = "Get users of the DB by id"
+    )
+    @GetMapping("/findBy/{id}")
     public ResponseEntity<User> findById(@PathVariable Long id) {
         User user = userService.findById(id);
         return ResponseEntity.ok(user);
     }
 
-    @PostMapping
+    @Operation(
+            summary = "Save users",
+            description = "save users of the DB by name"
+    )
+    @PostMapping("/save")
     public ResponseEntity<UserDto> save(@RequestBody UserDto user) {
         User savedUser = userService.save(convertToEntity(user));
         UserDto dto = convertToDto(savedUser);
         return ResponseEntity.ok(dto);
     }
+//
+//
+//    @PostMapping("/favorite")
+//    public ResponseEntity<User> saveFavoriteUser(@RequestBody User user) {
+//        User savedUser = userService.save(user);
+//        return ResponseEntity.ok(savedUser);
+//    }
 
-    @PostMapping("/favorite")
-    public ResponseEntity<User> saveFavoriteUser(@RequestBody User user) {
-        User savedUser = userService.save(user);
-        return ResponseEntity.ok(savedUser);
-    }
-
+    @Operation(
+            summary = "Update users",
+            description = "Update users of the DB by id"
+    )
     @PutMapping("/{id}")
     public ResponseEntity<User> update(@RequestBody User user, @PathVariable Long id) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         User updatedUser = userService.update(user, id);
