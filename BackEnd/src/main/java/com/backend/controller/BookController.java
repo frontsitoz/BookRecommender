@@ -1,6 +1,5 @@
 package com.backend.controller;
 
-
 import com.backend.model.Book;
 import com.backend.model.DTO.BookDto;
 import com.backend.service.IBookService;
@@ -9,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,9 +32,16 @@ public class BookController {
     private final GoogleBooksClient googleBooksClient;
 
     @GetMapping("/searchBooks")
-    public ResponseEntity<List<BookDto>> searchBooks(@RequestParam String query) {
-        List<BookDto> list = googleBooksClient.searchAndPrintBooks(query).stream().map(this::convertToDto).toList();
-        return new ResponseEntity<>(list, HttpStatus.OK);
+    public ResponseEntity<Page<BookDto>> searchBooks(
+            @RequestParam String query,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "30") int size) {
+
+        List<Book> books = googleBooksClient.searchAndPrintBooks(query, page * size, size);
+        List<BookDto> bookDtos = books.stream().map(this::convertToDto).toList();
+        Pageable pageable = PageRequest.of(page, size);
+        Page<BookDto> bookPage = new PageImpl<>(bookDtos, pageable, bookDtos.size());
+        return new ResponseEntity<>(bookPage, HttpStatus.OK);
     }
 
     @GetMapping

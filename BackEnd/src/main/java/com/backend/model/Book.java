@@ -45,7 +45,7 @@ public class Book {
     @Column(length = 255)
     private String publishedDate;
 
-    @Column(length = 255)
+    @Column(length = 255, nullable = true)
     private String imageUrl;
 
     @Column(nullable = false)

@@ -9,10 +9,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -23,17 +22,21 @@ public class GoogleBooksClient {
     private static final String API_KEY = "AIzaSyCrAvZb2kPz17Yy782H-3LlKuljOGw2DZE";
     private static final String BASE_URL = "https://www.googleapis.com/books/v1/volumes?q=";
 
-    public List<Book> searchAndPrintBooks(String query) {
-
-        String url = BASE_URL + query + "&key=" + API_KEY;
+    public List<Book> searchAndPrintBooks(String query, int startIndex, int maxResults) {
+        if(query == null || query.isBlank()){
+            String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
+            Random random = new Random();
+            int index = random.nextInt(lowerCaseLetters.length());
+            query = String.valueOf(lowerCaseLetters.charAt(index));
+        }
+        String url = BASE_URL + query + "&startIndex=" + startIndex + "&maxResults=" + maxResults + "&key=" + API_KEY;
         String response = restTemplate.getForObject(url, String.class);
-        // Procesando la respuesta con GSON
         Type bookListType = new TypeToken <Map<String, Object>>() {}.getType();
 
         Map<String, Object> jsonResponse = gson.fromJson(response, bookListType);
 
-        System.out.println(jsonResponse);
         assert jsonResponse != null;
+        System.out.println(jsonResponse);
         return processBooks(jsonResponse);
     }
 
@@ -51,25 +54,40 @@ public class GoogleBooksClient {
                 Map<String, Object> volumeInfo =
                         (Map<String, Object>) item.get("volumeInfo");
 
-                //Mapping the details of the book
                 @SuppressWarnings("unchecked")
                 List<String> category = (List<String>) volumeInfo.get("categories");
+                if(category == null){
+                    category = new ArrayList<>();
+                    category.add("No category");
+                }
                 String title = (String) volumeInfo.get("title");
 
                 @SuppressWarnings("unchecked")
                 Map<String, Object> imageLinks =
                         (Map<String, Object>) volumeInfo.get("imageLinks");
+                String thumbnail;
+                if(imageLinks == null){
+                thumbnail = "no image";
+                } else {
+                    thumbnail = (String) imageLinks.get("thumbnail");
+                }
+//                    thumbnail = (String) imageLinks.get("thumbnail");
 
                 @SuppressWarnings("unchecked")
                 List<String> authors = (List<String>) volumeInfo.get("authors");
+                if(authors == null){
+                    authors = new ArrayList<>();
+                    authors.add("No author");
+                }else {
+                    authors = (List<String>) volumeInfo.get("authors");
+                }
                 String publishedDate = (String) volumeInfo.get("publishedDate");
                 String publisher= (String) volumeInfo.get("publisher");
                 String description = (String) volumeInfo.get("description");
                 Double pageCount = (Double) volumeInfo.get("pageCount");
 
-                String thumbnail = (String) imageLinks.get("thumbnail");
-//                System.out.println("thumbnail = " + thumbnail);
-                //Creating a new book object
+
+
                 Book book = new Book();
                 book.setTitle(title);
                 book.setAuthors(authors.toString());
@@ -82,14 +100,6 @@ public class GoogleBooksClient {
                 book.setDescription(description);
 
                 books.add(book);
-//                System.out.println("book = " + book);
-//                System.out.println("Title: " + title);
-//                System.out.println("Categories: " + category);
-//                System.out.println("publisher = " + publisher);
-//                System.out.println("publishedDate = " + publishedDate);
-//                System.out.println("Authors: " + (authors != null ? String.join(", ", authors) : "Unknown author"));
-//                System.out.println("Description: " + (description != null ? description : "No description available."));
-//                System.out.println("------");
             }
         } else {
             System.out.println("No books found for the query: ");
