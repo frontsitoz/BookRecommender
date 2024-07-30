@@ -1,5 +1,38 @@
+import requests
+from schemas import Book
+
 
 def generate_recommendations(user_books: List[Book], all_books: List[Book], top_n: int = 5) -> List[Book]:
+
+
+
+# URL de la API de Google Books para buscar libros relacionados con "Gato"
+url = "https://www.googleapis.com/books/v1/volumes?q=Gato&key=AIzaSyCrAvZb2kPz17Yy782H-3LlKuljOGw2DZE"
+
+# Realizamos la solicitud GET a la API
+response = requests.get(url)
+
+# Lista para almacenar los títulos de los libros
+book_titles = []
+
+# Verificamos si la solicitud fue exitosa
+if response.status_code == 200:
+    # Extraemos los datos en formato JSON
+    books_data = response.json()
+    # Iteramos sobre los libros en 'items'
+    for item in books_data.get('items', []):
+        # Obtenemos la información del volumen
+        volume_info = item.get('volumeInfo', {})
+        # Obtenemos el título del libro
+        title = volume_info.get('title')
+        if title:
+            book_titles.append(title)
+else:
+    print(f"Error: {response.status_code}")
+
+# Mostramos los títulos de los libros
+for title in book_titles:
+    print(title)
     # Creamos la lista de libros que el usuario a leido
     read_books = [book for book in user_books if book.read]
 
