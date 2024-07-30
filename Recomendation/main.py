@@ -1,14 +1,12 @@
 from fastapi import FastAPI
-from recommender import recommended_books
+
 
 app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return {"Hello": "world"}
 
 
-@app.get("/getData")
-def recommender():
-    recommended_books
+
 
