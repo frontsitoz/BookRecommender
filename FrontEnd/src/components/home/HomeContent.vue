@@ -30,7 +30,6 @@ const searchBooks = async () => {
     }
     const data = await response.json();
     books.value = data.content;
-    console.log(books.value);
   } catch (error) {
     console.error("Error searching books:", error);
   } finally {

@@ -123,9 +123,14 @@ const dialogContentClass = ref(
         <h1 class="w-full h-auto text-white font-bold font-castoro text-xl">
           Description:
         </h1>
-        <p class="text-white font-montserrat text-base">
+        <p v-if="book.description" class="text-white font-montserrat text-base">
           {{ book.description }}
         </p>
+        <div v-else class="w-full h-36 flex justify-center items-center">
+          <h1 class="text-white font-castoro text-xl font-bold">
+            No description available
+          </h1>
+        </div>
       </DialogDescription>
     </DialogContent>
   </Dialog>
