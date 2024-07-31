@@ -48,7 +48,7 @@ const dialogContentClass = ref(
     <DialogContent :class="dialogContentClass">
       <DialogHeader class="flex flex-col items-center">
         <DialogTitle
-          class="text-white max-w-[500px] text-4xl font-normal text-center pb-7 font-castoro w-full border-b border-[#9BFE48]"
+          class="text-white max-w-[500px] text-4xl font-normal text-center pb-7 font-castoro w-full border-b border-[#9BFE48] line-clamp-3 max-h-max"
           >{{ book.title }}</DialogTitle
         >
         <div class="w-full h-auto flex mt-7">
@@ -64,7 +64,9 @@ const dialogContentClass = ref(
             <div class="flex flex-col gap-10 text-white">
               <div class="w-full flex gap-5">
                 <h3 class="text-xl font-castoro font-bold">Author:</h3>
-                <p class="font-montserrat text-base">{{ book.authors }}</p>
+                <p class="font-montserrat text-base">
+                  {{ book.authors.replace(/^\[|\]$/g, "") }}
+                </p>
               </div>
 
               <div class="w-full flex gap-5">
@@ -88,7 +90,9 @@ const dialogContentClass = ref(
 
               <div class="w-full flex gap-5">
                 <h3 class="text-xl font-castoro font-bold">Category:</h3>
-                <p class="font-montserrat text-base">{{ book.genre }}</p>
+                <p class="font-montserrat text-base">
+                  {{ book.genre.replace(/^\[|\]$/g, "") }}
+                </p>
               </div>
             </div>
 
