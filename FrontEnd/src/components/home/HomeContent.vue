@@ -16,10 +16,17 @@ const searchBooks = async () => {
   try {
     isLoading.value = true;
     const response = await fetch(
-      "http://localhost:5173/api/books/searchBooks?query="
+      "http://localhost:9090/api/books/searchBooks?query"
     );
     if (!response.ok) {
-      throw new Error("Network response was not ok");
+      const errorBody = await response.text();
+      console.error(
+        "Error response:",
+        response.status,
+        response.statusText,
+        errorBody
+      );
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
     books.value = data.content;
