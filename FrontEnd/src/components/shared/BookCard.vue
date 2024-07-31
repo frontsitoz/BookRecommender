@@ -48,7 +48,7 @@ const dialogContentClass = ref(
     <DialogContent :class="dialogContentClass">
       <DialogHeader class="flex flex-col items-center">
         <DialogTitle
-          class="text-white max-w-[500px] text-4xl font-normal text-center pb-7 font-castoro w-full border-b border-[#9BFE48] line-clamp-3 max-h-max"
+          class="text-white max-w-[500px] text-4xl font-normal text-center pb-7 font-castoro w-full border-b border-[#9BFE48] line-clamp-3 max-h-[120px]"
           >{{ book.title }}</DialogTitle
         >
         <div class="w-full h-auto flex mt-7">
