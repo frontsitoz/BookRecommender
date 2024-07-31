@@ -1,6 +1,8 @@
 /Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/BackEndApplication.java
 /Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/config/MapperConfig.java
 /Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/config/RestConfig.java
+/Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/config/SwaggerConfig.java
+/Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/config/corsConfig.java
 /Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/controller/BookController.java
 /Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/controller/RecommendationController.java
 /Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/controller/UserController.java
