@@ -17,7 +17,7 @@ const { book } = defineProps({
 });
 
 const dialogContentClass = ref(
-  "max-w-[840px] flex flex-col gap-4 px-16 py-8 bg-[#0A0C15] overflow-scroll custom-scrollbar"
+  "max-w-[840px] flex flex-col gap-6 px-16 py-8 bg-[#0A0C15] overflow-scroll custom-scrollbar"
 );
 </script>
 
@@ -48,21 +48,21 @@ const dialogContentClass = ref(
     <DialogContent :class="dialogContentClass">
       <DialogHeader class="flex flex-col items-center">
         <DialogTitle
-          class="text-white max-w-[500px] text-4xl font-normal text-center pb-7 font-castoro w-full border-b border-[#9BFE48] line-clamp-3 max-h-max"
+          class="text-white max-w-[500px] text-4xl font-normal text-center pb-7 font-castoro w-full border-b border-[#9BFE48] line-clamp-3 max-h-[120px]"
           >{{ book.title }}</DialogTitle
         >
         <div class="w-full h-auto flex mt-7">
           <img
             :src="book.imageUrl"
             alt="book_portrait"
-            class="w-72 object-cover rounded-lg mr-5"
+            class="w-[350px] max-w-[350px] h-[385px] object-cover rounded-lg mr-5"
           />
 
           <div
-            class="w-full h-auto border-l border-[#9BFE48] pl-5 pr-10 flex flex-col justify-between"
+            class="w-full h-96 border-l border-[#9BFE48] flex flex-col justify-between"
           >
-            <div class="flex flex-col gap-10 text-white">
-              <div class="w-full flex gap-5">
+            <div class="flex flex-col gap-10 pl-5 text-white">
+              <div class="w-full max-h-6 flex gap-5 line-clamp-1">
                 <h3 class="text-xl font-castoro font-bold">Author:</h3>
                 <p class="font-montserrat text-base">
                   {{ book.authors.replace(/^\[|\]$/g, "") }}
@@ -119,13 +119,18 @@ const dialogContentClass = ref(
         </div>
       </DialogHeader>
 
-      <DialogDescription class="w-full max-h-60 flex flex-col gap-2">
+      <DialogDescription class="w-full min-h-44 max-h-60 flex flex-col gap-2">
         <h1 class="w-full h-auto text-white font-bold font-castoro text-xl">
           Description:
         </h1>
-        <p class="text-white font-montserrat text-base">
+        <p v-if="book.description" class="text-white font-montserrat text-base">
           {{ book.description }}
         </p>
+        <div v-else class="w-full h-36 flex justify-center items-center">
+          <h1 class="text-white font-castoro text-xl font-bold">
+            No description available
+          </h1>
+        </div>
       </DialogDescription>
     </DialogContent>
   </Dialog>
