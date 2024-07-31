@@ -2,8 +2,6 @@
 import { useUser } from "vue-clerk";
 const { user } = useUser();
 
-console.log(user.value);
-
 const currentUser = user.value;
 </script>
 

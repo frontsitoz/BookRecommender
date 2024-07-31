@@ -38,10 +38,18 @@ const dialogContentClass = ref(
           {{ book.title }}
         </h3>
         <p class="text-white text-xs font-montserrat w-full line-clamp-1 mb-2">
-          {{ book.authors.replace(/^\[|\]$/g, "") }}
+          {{
+            book.authors
+              ? book.authors.replace(/^\[|\]$/g, "")
+              : "No authors found"
+          }}
         </p>
         <h5 class="w-full line-clamp-1 text-[#35c068] font-montserrat text-sm">
-          {{ book.genre.replace(/^\[|\]$/g, "") }}
+          {{
+            book.genre
+              ? book.genre.replace(/^\[|\]$/g, "")
+              : "No category found"
+          }}
         </h5>
       </div>
     </DialogTrigger>
@@ -65,7 +73,11 @@ const dialogContentClass = ref(
               <div class="w-full max-h-6 flex gap-5 line-clamp-1">
                 <h3 class="text-xl font-castoro font-bold">Author:</h3>
                 <p class="font-montserrat text-base">
-                  {{ book.authors.replace(/^\[|\]$/g, "") }}
+                  {{
+                    book.authors
+                      ? book.authors.replace(/^\[|\]$/g, "")
+                      : "No authors found"
+                  }}
                 </p>
               </div>
 
@@ -91,7 +103,11 @@ const dialogContentClass = ref(
               <div class="w-full flex gap-5">
                 <h3 class="text-xl font-castoro font-bold">Category:</h3>
                 <p class="font-montserrat text-base">
-                  {{ book.genre.replace(/^\[|\]$/g, "") }}
+                  {{
+                    book.genre
+                      ? book.genre.replace(/^\[|\]$/g, "")
+                      : "No category found"
+                  }}
                 </p>
               </div>
             </div>
