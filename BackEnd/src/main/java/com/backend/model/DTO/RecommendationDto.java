@@ -1,19 +1,32 @@
 package com.backend.model.DTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.OneToMany;
+import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class RecommendationDto {
 
-    private Long id;
-    private UserDto userId;
-    private BookDto bookId;
-    private String recommendationText;
-    private LocalDateTime recommendedAt;
+    private Long idRecommendation;
+
+    @JsonBackReference(value = "user-recommendations")
+    private UserDto user;
+
+    @JsonManagedReference(value = "recommendation-book")
+    private BookDto book;
+
+//    @JsonBackReference(value = "user-recommendations")
+//    private UserDto user;
+//
+//    @JsonManagedReference(value = "recommendation-books")
+//    private List<BookDto> books;
+
 }
