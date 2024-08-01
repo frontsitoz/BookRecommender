@@ -1,16 +1,12 @@
 package com.backend.model;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Data
@@ -22,7 +18,6 @@ import java.util.List;
 @Entity
 public class Book {
 
-    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idBook;
@@ -51,21 +46,21 @@ public class Book {
     @Column(nullable = false)
     private Double pageCount;
 
-//    @Column(nullable = false)
+    private Integer rating;
+
     private Boolean isBookMarked;
 
-    @Column(nullable = false)
     private Boolean isRead;
 
-//    @Column(nullable = false)
     private Boolean isReading;
 
-//    @Column(nullable = false)
     private Boolean isLiked;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user", nullable = false)
-    @JsonIgnore
+    @JoinColumn(name = "id_user", nullable = true)
     private User user;
 
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "id_recommendation", nullable = true)
+//    private Recommendation recommendation;
 }

@@ -23,8 +23,9 @@ public class UserDto {
     private String email;
     private LocalDateTime createdAt;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "user-books")
     private List<BookDto> books;
 
+    @JsonManagedReference(value = "user-recommendations")
     private List<RecommendationDto> recommendations;
 }
