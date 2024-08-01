@@ -1,6 +1,6 @@
 # Esquemas de datos para entrada y salida de API
 from pydantic import BaseModel, Field
-from typing import List
+from typing import List, Optional
 
 
 # Clase libro
@@ -22,6 +22,6 @@ class Book(BaseModel):
 
 # clase del modelado de datos para la solicitud 
 class RecommendationRequest(BaseModel):
-    user_books: List[Book]
+    user_books: Optional[ List[Book]] = []
     all_books: List[Book]
-    top_n: int = 5
+    top_n: int = 10
