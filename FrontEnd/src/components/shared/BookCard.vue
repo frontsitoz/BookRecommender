@@ -112,24 +112,30 @@ const dialogContentClass = ref(
               </div>
             </div>
 
-            <div class="w-full h-10 flex justify-around">
-              <img
-                src="/images/unfavorite-icon.svg"
-                alt="star"
-                class="h-full invert cursor-pointer"
-              />
-
-              <img
-                src="/images/bookmark-icon.svg"
-                alt="bookmark"
-                class="h-full invert cursor-pointer"
-              />
-
-              <img
-                src="/images/book-open-icon.svg"
-                alt="open_book"
-                class="h-full invert cursor-pointer"
-              />
+            <div class="w-full flex">
+              <div class="w-max px-10 h-10 flex justify-around">
+                <img
+                  src="/images/bookmark-icon.svg"
+                  alt="bookmark"
+                  class="w-12 h-full invert cursor-pointer"
+                />
+              </div>
+              <div class="w-full h-10 flex justify-center items-center">
+                <img
+                  v-for="star in 5"
+                  :key="star"
+                  src="/images/unfavorite-icon.svg"
+                  :alt="'Estrella ' + star"
+                  @click="setRating(star)"
+                  :class="[
+                    'h-10 w-10 cursor-pointer mx-1 invert',
+                    {
+                      'opacity-100': star <= rating,
+                      'opacity-50': star > rating,
+                    },
+                  ]"
+                />
+              </div>
             </div>
           </div>
         </div>
