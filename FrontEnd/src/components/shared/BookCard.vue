@@ -31,6 +31,12 @@ const setRating = (value) => {
     rating.value = value;
   }
 };
+
+const isBookmarked = ref(false);
+
+const toggleBookmark = () => {
+  isBookmarked.value = !isBookmarked.value;
+};
 </script>
 
 <template>
@@ -131,7 +137,12 @@ const setRating = (value) => {
                 <img
                   src="/images/bookmark-icon.svg"
                   alt="bookmark"
-                  class="w-12 h-full invert cursor-pointer"
+                  class="w-12 h-full cursor-pointer"
+                  :class="{
+                    'invert opacity-100': isBookmarked,
+                    'invert opacity-50': !isBookmarked,
+                  }"
+                  @click="toggleBookmark"
                   draggable="false"
                 />
               </div>
