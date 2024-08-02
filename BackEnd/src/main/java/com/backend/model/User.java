@@ -21,8 +21,8 @@ public class User {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUser;
+    @Column(name = "id_user")
+    private String idUser; // Cambiado a String para manejar IDs de Clerk
 
     @Column(nullable = false, length = 255)
     private String username;
