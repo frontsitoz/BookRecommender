@@ -56,10 +56,11 @@ public class UserController {
             description = "save users of the DB by name"
     )
     @PostMapping("/save")
-    public ResponseEntity<UserDto> save(@RequestBody UserDto user) {
-        User savedUser = userService.save(convertToEntity(user));
-        UserDto dto = convertToDto(savedUser);
-        return ResponseEntity.ok(dto);
+    public ResponseEntity<UserDto> save(@RequestBody UserDto userDto) {
+        User user = convertToEntity(userDto);
+        User savedUser = userService.save(user);
+        UserDto savedUserDto = convertToDto(savedUser);
+        return ResponseEntity.ok(savedUserDto);
     }
 //
 //

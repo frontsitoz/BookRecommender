@@ -10,11 +10,13 @@ com/backend/service/IBookService.class
 com/backend/service/api/GoogleBooksClient.class
 com/backend/repository/IBookRepo.class
 com/backend/service/impl/BookServiceImpl.class
+com/backend/config/SwaggerConfig.class
 com/backend/service/IRecommendationService.class
 com/backend/service/ICRUD.class
 com/backend/model/DTO/BookDto.class
 com/backend/service/api/GoogleBooksClient$1.class
 com/backend/repository/IGenericRepo.class
+com/backend/config/corsConfig$1.class
 com/backend/model/Book.class
 com/backend/model/DTO/RecommendationDto.class
 com/backend/exception/MessageException.class
@@ -23,6 +25,7 @@ com/backend/model/DTO/UserDto.class
 com/backend/repository/IUserRepo.class
 com/backend/config/RestConfig.class
 com/backend/service/impl/RecommendationServiceImpl.class
+com/backend/config/corsConfig.class
 com/backend/controller/UserController.class
 com/backend/controller/BookController.class
 com/backend/service/impl/UserServiceImpl.class
