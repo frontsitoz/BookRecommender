@@ -19,6 +19,18 @@ const { book } = defineProps({
 const dialogContentClass = ref(
   "max-w-[840px] flex flex-col gap-6 px-16 py-8 bg-[#0A0C15] overflow-scroll custom-scrollbar"
 );
+
+const rating = ref(0);
+
+const setRating = (value) => {
+  if (rating.value === value) {
+    // Si el usuario hace clic en la estrella ya seleccionada, quita el rating
+    rating.value = 0;
+  } else {
+    // Si no, establece el nuevo rating
+    rating.value = value;
+  }
+};
 </script>
 
 <template>
@@ -30,6 +42,7 @@ const dialogContentClass = ref(
         <img
           :src="book.imageUrl"
           alt="book_portrait"
+          draggable="false"
           class="w-full h-60 object-cover rounded-md mb-4"
         />
         <h3
@@ -64,6 +77,7 @@ const dialogContentClass = ref(
             :src="book.imageUrl"
             alt="book_portrait"
             class="w-[350px] max-w-[350px] h-[385px] object-cover rounded-lg mr-5"
+            draggable="false"
           />
 
           <div
@@ -118,6 +132,7 @@ const dialogContentClass = ref(
                   src="/images/bookmark-icon.svg"
                   alt="bookmark"
                   class="w-12 h-full invert cursor-pointer"
+                  draggable="false"
                 />
               </div>
               <div class="w-full h-10 flex justify-center items-center">
@@ -127,6 +142,7 @@ const dialogContentClass = ref(
                   src="/images/unfavorite-icon.svg"
                   :alt="'Estrella ' + star"
                   @click="setRating(star)"
+                  draggable="false"
                   :class="[
                     'h-10 w-10 cursor-pointer mx-1 invert',
                     {
