@@ -7,6 +7,7 @@ import com.backend.service.IBookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,5 +24,10 @@ public class BookServiceImpl extends CRUDImpl<Book, Long> implements IBookServic
     @Override
     public Optional<Book> findByTitleAndPageCountAndAuthors(String title, Double pageCount, String authors) {
         return bookRepo.findByTitleAndPageCountAndAuthors(title, pageCount, authors);
+    }
+
+    @Override
+    public List<Book> findByUserIdUser(String idUser) {
+        return bookRepo.findByUserIdUser(idUser);
     }
 }

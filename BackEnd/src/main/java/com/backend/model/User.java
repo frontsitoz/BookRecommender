@@ -19,7 +19,6 @@ import java.util.List;
 @Entity
 public class User {
 
-
     @Id
     @Column(name = "id_user")
     private String idUser; // Cambiado a String para manejar IDs de Clerk
@@ -29,9 +28,6 @@ public class User {
 
     @Column(nullable = false, length = 255)
     private String email;
-
-    @Column(nullable = false)
-    private String passwordHash;
 
     @Column(nullable = false)
     private LocalDateTime createdAt;

@@ -17,4 +17,6 @@ public class UserServiceImpl extends CRUDImpl<User, Long> implements IUserServic
     public IGenericRepo<User, Long> getRepo() {
         return userRepo;
     }
+
+
 }

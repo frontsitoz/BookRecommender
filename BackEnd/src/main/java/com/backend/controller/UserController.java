@@ -46,9 +46,11 @@ public class UserController {
             description = "Get users of the DB by id"
     )
     @GetMapping("/findBy/{id}")
-    public ResponseEntity<User> findById(@PathVariable Long id) {
+    public ResponseEntity<UserDto> findById(@PathVariable Long id) {
         User user = userService.findById(id);
-        return ResponseEntity.ok(user);
+        UserDto dto = convertToDto(user);
+        return ResponseEntity.ok(dto
+        );
     }
 
     @Operation(
@@ -75,9 +77,9 @@ public class UserController {
             description = "Update users of the DB by id"
     )
     @PutMapping("/{id}")
-    public ResponseEntity<User> update(@RequestBody User user, @PathVariable Long id) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        User updatedUser = userService.update(user, id);
-        return ResponseEntity.ok(updatedUser);
+    public ResponseEntity<UserDto> update(@RequestBody UserDto user, @PathVariable Long id) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        User updatedUser = userService.update(convertToEntity(user), id);
+        return ResponseEntity.ok(convertToDto(updatedUser));
     }
 
     @DeleteMapping("/{id}")
