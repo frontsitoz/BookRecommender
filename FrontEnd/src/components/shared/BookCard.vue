@@ -34,8 +34,68 @@ const setRating = (value) => {
 
 const isBookmarked = ref(false);
 
-const toggleBookmark = () => {
-  isBookmarked.value = !isBookmarked.value;
+const toggleBookmark = async () => {
+  try {
+    if (!isBookmarked.value) {
+      // Creamos el objeto que se enviaría como body
+      const bookData = {
+        idBook: book.idBook,
+        title: book.title,
+        authors: book.authors,
+        description: book.description,
+        genre: book.genre,
+        publisher: book.publisher,
+        publishedDate: book.publishedDate,
+        imageUrl: book.imageUrl,
+        pageCount: book.pageCount,
+        rating: 0,
+        isBookMarked: true,
+        isRead: false,
+        isReading: false,
+        isLiked: false,
+      };
+
+      const response = await fetch("http://localhost:9090/api/books/save", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error al guardar el libro");
+      }
+
+      const savedBook = await response.json();
+      console.log("Libro guardado:", savedBook);
+      book.idBook = savedBook.idBook;
+
+      console.log("Libro guardado exitosamente");
+      isBookmarked.value = true;
+    } else {
+      console.log("Eliminando bookmark del libro con ID:", book.idBook);
+
+      if (!book.idBook) {
+        throw new Error("No se puede eliminar un libro sin ID");
+      }
+      const response = await fetch(
+        `http://localhost:9090/api/books/${book.idBook}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Error al eliminar el libro");
+      }
+
+      console.log("Libro eliminado exitosamente");
+      isBookmarked.value = false;
+    }
+  } catch (error) {
+    console.error("Error al manejar el bookmark:", error);
+  }
 };
 </script>
 
