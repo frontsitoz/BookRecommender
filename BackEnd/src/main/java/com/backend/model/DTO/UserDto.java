@@ -2,24 +2,24 @@ package com.backend.model.DTO;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.Email;
+import lombok.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class UserDto {
 
     private String idUser;
     private String username;
 
-    private String passwordHash;
+    @Email
     private String email;
     private LocalDateTime createdAt;
 
@@ -28,4 +28,5 @@ public class UserDto {
 
     @JsonManagedReference(value = "user-recommendations")
     private List<RecommendationDto> recommendations;
+
 }

@@ -26,33 +26,41 @@ public class RecommendationController {
     private final ModelMapper mapper;
 
     @GetMapping
-    public ResponseEntity<List<Recommendation>> findAll() {
-        List<Recommendation> recommendations = recommendationService.findAll();
+    public ResponseEntity<List<RecommendationDto>> findAll() {
+        List<RecommendationDto> recommendations = recommendationService
+                .findAll()
+                .stream().map(this::convertToDto)
+                .toList();
         return ResponseEntity.ok(List.of());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Recommendation> findById(@PathVariable Long id) {
-        Recommendation recommendation = recommendationService.findById(id);
+    public ResponseEntity<RecommendationDto> findById(@PathVariable Long id) {
+        RecommendationDto recommendation =
+                convertToDto(recommendationService.findById(id));
         return ResponseEntity.ok(recommendation);
     }
 
     @PostMapping
-    public ResponseEntity<Recommendation> save(@RequestBody Recommendation recommendation) {
-        Recommendation savedRecommendation = recommendationService.save(recommendation);
-        return ResponseEntity.ok(savedRecommendation);
+    public ResponseEntity<RecommendationDto> save(@RequestBody RecommendationDto recommendation) {
+        Recommendation savedRecommendation =
+                recommendationService.save(convertToEntity(recommendation));
+        return ResponseEntity.ok(convertToDto(savedRecommendation));
     }
 
     @PostMapping("/favorite")
-    public ResponseEntity<Recommendation> saveFavoriteRecommendation(@RequestBody Recommendation recommendation) {
-        Recommendation savedRecommendation = recommendationService.save(recommendation);
-        return ResponseEntity.ok(savedRecommendation);
+    public ResponseEntity<RecommendationDto> saveFavoriteRecommendation(@RequestBody RecommendationDto recommendation) {
+        Recommendation savedRecommendation =
+                recommendationService.save(convertToEntity(recommendation));
+        return ResponseEntity.ok(convertToDto(savedRecommendation));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Recommendation> update(@RequestBody Recommendation recommendation, @PathVariable Long id) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Recommendation updatedRecommendation = recommendationService.update(recommendation, id);
-        return ResponseEntity.ok(updatedRecommendation);
+    public ResponseEntity<RecommendationDto> update(@RequestBody RecommendationDto recommendation, @PathVariable Long id) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Recommendation updatedRecommendation =
+                recommendationService
+                        .update(convertToEntity(recommendation), id);
+        return ResponseEntity.ok(convertToDto(updatedRecommendation));
     }
 
     @DeleteMapping("/{id}")

@@ -7,8 +7,8 @@ import com.backend.service.IBookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -27,11 +27,7 @@ public class BookServiceImpl extends CRUDImpl<Book, Long> implements IBookServic
     }
 
     @Override
-    public Book save(Book book) {
-    // Asegurarse de que el ID del libro no sea nulo
-    if (book.getIdBook() == null) {
-        book.setIdBook(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE);
+    public List<Book> findByUserIdUser(String idUser) {
+        return bookRepo.findByUserIdUser(idUser);
     }
-    return bookRepo.save(book);
-}
 }
