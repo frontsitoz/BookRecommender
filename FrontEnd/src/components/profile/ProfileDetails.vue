@@ -1,6 +1,25 @@
 <script setup>
 import ProfileCategory from "./ProfileCategory.vue";
-import { books } from "@/constants";
+import { ref, onMounted } from "vue";
+
+const books = ref([]);
+
+const fetchBooks = async () => {
+  try {
+    const response = await fetch("http://localhost:9090/api/books");
+    if (!response.ok) {
+      throw new Error("Error al obtener los libros");
+    }
+    const data = await response.json();
+    books.value = data;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+onMounted(() => {
+  fetchBooks();
+});
 </script>
 
 <template>
@@ -8,8 +27,6 @@ import { books } from "@/constants";
     class="flex flex-col gap-14 w-full max-h-full overflow-scroll custom-scrollbar"
   >
     <ProfileCategory type="bookmarked" :books="books" />
-    <ProfileCategory type="favorites" :books="books" />
-    <ProfileCategory type="books-read" :books="books" />
   </section>
 </template>
 
