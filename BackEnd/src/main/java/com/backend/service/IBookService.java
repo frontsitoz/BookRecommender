@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface IBookService extends ICRUD<Book, Long>{
 
     Optional<Book> findByTitleAndPageCountAndAuthors(String title,
-                                                     Double pageCount,
-                                                     String authors);
+                                                       Double pageCount,
+                                                       String authors);
+
+    boolean deleteById(Long id);
 }

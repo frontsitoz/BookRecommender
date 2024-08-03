@@ -29,11 +29,25 @@ const searchBooks = async () => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    books.value = data.content;
+    books.value = data.content.map((book) => ({
+      ...book,
+      isBookMarked: false,
+    }));
   } catch (error) {
     console.error("Error searching books:", error);
   } finally {
     isLoading.value = false;
+  }
+};
+
+const updateBookInList = (updatedBook) => {
+  const index = books.value.findIndex(
+    (book) => book.idBook === updatedBook.idBook
+  );
+  if (index !== -1) {
+    books.value[index] = { ...books.value[index], ...updatedBook };
+  } else {
+    books.value.push(updatedBook);
   }
 };
 
@@ -66,7 +80,13 @@ onMounted(() => {
       v-else
       class="grid max-lg:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-7 place-items-center px-10 py-10 gap-10 w-full h-auto"
     >
-      <BookCard v-for="book in books" :key="book.id" :book="book" />
+      <BookCard
+        v-for="book in books"
+        :key="book.idBook"
+        :book="book"
+        :isBookMarked="book.isBookMarked"
+        @book-updated="updateBookInList"
+      />
     </div>
   </section>
 </template>

@@ -85,15 +85,8 @@ public class BookController {
     )
     @PostMapping("/save")
     public ResponseEntity<BookDto> save(@RequestBody BookDto book) {
-        if (!isBookAlreadySaved(book.getTitle(), book.getPageCount(), book.getAuthors())) {
-            if (book.getIdBook() == null) {
-                book.setIdBook(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE);
-            }
-            Book savedBook = bookService.save(convertToEntity(book));
-            return ResponseEntity.ok(convertToDto(savedBook));
-        } else {
-            return ResponseEntity.badRequest().build();
-        }
+        Book savedBook = bookService.save(convertToEntity(book));
+        return ResponseEntity.ok(convertToDto(savedBook));
     }
 
 //
@@ -119,9 +112,19 @@ public class BookController {
             description = "Delete a book from the database"
     )
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
-        bookService.deleteById(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<?> deleteById(@PathVariable Long id) {
+        try {
+            boolean deleted = bookService.deleteById(id);
+            if (deleted) {
+                return ResponseEntity.ok().body("Libro eliminado exitosamente");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Libro no encontrado con ID: " + id);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Error al eliminar el libro: " + e.getMessage());
+        }
     }
 
     /////////////////////////////////////

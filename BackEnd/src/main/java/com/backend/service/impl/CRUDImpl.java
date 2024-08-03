@@ -27,10 +27,10 @@ public abstract class CRUDImpl <T, ID> implements ICRUD<T, ID> {
     }
 
     @Override
-    public void deleteById(ID id) {
-
+    public boolean deleteById(ID id) {
         getRepo().findById(id).orElseThrow(() -> new ModelNotFoundException("Id not found "+id));
         getRepo().deleteById(id);
+        return true;
     }
 
     @Override

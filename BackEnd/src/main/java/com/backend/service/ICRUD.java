@@ -10,7 +10,7 @@ public interface ICRUD <T, ID>  {
 
     List<T> findAll();
     T findById (ID id);
-    void deleteById(ID id);
+    boolean deleteById(ID id);
     T save(T t);
     T update(T t, ID id) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException;
 }

@@ -10,7 +10,12 @@ const { type, books } = defineProps(["type", "books"]);
     <div
       class="grid max-lg:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-7 place-items-center w-full h-auto"
     >
-      <BookCard v-for="book in books" :key="book.idBook" :book="book" />
+      <BookCard
+        v-for="book in books"
+        :key="book.idBook"
+        :book="book"
+        :isBookMarked="book.isBookMarked"
+      />
     </div>
   </article>
 </template>

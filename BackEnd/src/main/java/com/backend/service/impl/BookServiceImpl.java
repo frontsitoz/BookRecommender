@@ -28,10 +28,20 @@ public class BookServiceImpl extends CRUDImpl<Book, Long> implements IBookServic
 
     @Override
     public Book save(Book book) {
-    // Asegurarse de que el ID del libro no sea nulo
-    if (book.getIdBook() == null) {
-        book.setIdBook(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE);
+        // Asegurarse de que el ID del libro no sea nulo
+        if (book.getIdBook() == null) {
+            book.setIdBook(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE);
+        }
+        return bookRepo.save(book);
     }
-    return bookRepo.save(book);
-}
+
+    @Override
+    public boolean deleteById(Long id) {
+        Optional<Book> bookOptional = bookRepo.findById(id);
+        if (bookOptional.isPresent()) {
+            bookRepo.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }

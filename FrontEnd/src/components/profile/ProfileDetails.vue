@@ -13,7 +13,10 @@ const fetchBooks = async () => {
       throw new Error("Error al obtener los libros");
     }
     const data = await response.json();
-    books.value = data;
+    books.value = data.map((book) => ({
+      ...book,
+      isBookMarked: true, // Asumimos que todos los libros en la base de datos están marcados
+    }));
   } catch (error) {
     console.error("Error:", error);
   } finally {
