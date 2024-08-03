@@ -37,8 +37,7 @@ public class BookServiceImpl extends CRUDImpl<Book, Long> implements IBookServic
 
     @Override
     public boolean deleteById(Long id) {
-        Optional<Book> bookOptional = bookRepo.findById(id);
-        if (bookOptional.isPresent()) {
+        if (bookRepo.existsById(id)) {
             bookRepo.deleteById(id);
             return true;
         }

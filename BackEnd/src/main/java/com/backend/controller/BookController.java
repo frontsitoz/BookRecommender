@@ -17,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -46,14 +45,7 @@ public class BookController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "40") int size) {
 
-        List<Book> books = googleBooksClient.searchAndPrintBooks(query, page * size, size);
-        List<BookDto> bookDtos = books.stream()
-            .map(book -> {
-                BookDto dto = convertToDto(book);
-                dto.setIdBook(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE);
-                return dto;
-            })
-            .toList();
+        List<BookDto> bookDtos = googleBooksClient.searchAndPrintBooks(query, page * size, size);
         Pageable pageable = PageRequest.of(page, size);
         Page<BookDto> bookPage = new PageImpl<>(bookDtos, pageable, bookDtos.size());
         return new ResponseEntity<>(bookPage, HttpStatus.OK);
@@ -84,8 +76,16 @@ public class BookController {
             description = "Save a book in the database"
     )
     @PostMapping("/save")
-    public ResponseEntity<BookDto> save(@RequestBody BookDto book) {
-        Book savedBook = bookService.save(convertToEntity(book));
+    public ResponseEntity<BookDto> save(@RequestBody BookDto bookDto) {
+        Optional<Book> existingBook = bookService.findByTitleAndPageCountAndAuthors(
+            bookDto.getTitle(), bookDto.getPageCount(), bookDto.getAuthors());
+        
+        if (existingBook.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(convertToDto(existingBook.get()));
+        }
+        
+        Book book = convertToEntity(bookDto);
+        Book savedBook = bookService.save(book);
         return ResponseEntity.ok(convertToDto(savedBook));
     }
 
@@ -102,9 +102,14 @@ public class BookController {
             description = "Update a book in the database"
     )
     @PutMapping("/update/{id}")
-    public ResponseEntity<BookDto> update(@RequestBody BookDto book, @PathVariable Long id) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Book updatedBook = bookService.update(convertToEntity(book), id);
-        return ResponseEntity.ok(convertToDto(updatedBook));
+    public ResponseEntity<BookDto> update(@RequestBody BookDto bookDto, @PathVariable Long id) {
+        try {
+            Book book = convertToEntity(bookDto);
+            Book updatedBook = bookService.update(book, id);
+            return ResponseEntity.ok(convertToDto(updatedBook));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     @Operation(

@@ -1,22 +1,20 @@
 package com.backend.model.DTO;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.annotation.Nullable;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Getter
-@Setter
-
+@Data
+@AllArgsConstructor
 @NoArgsConstructor
-@ToString
+
 public class BookDto {
 
-    private Long id;
+    private Long idBook;
     private String title;
     private String authors;
     private String description;
@@ -25,34 +23,16 @@ public class BookDto {
     private String publishedDate;
     private String imageUrl;
     private Double pageCount;
-    private Float average_rating = 0.0f;
-    private Boolean isBookMarked = false;
-    private Boolean isRead = false;
-    private Boolean isReading = false;
-    private Boolean isLike = false;
+    private Float averageRating;
+    private Integer rating;
+    private Boolean isBookMarked;
+    private Boolean isRead;
+    private Boolean isReading;
+    private Boolean isLike;
 
     @JsonBackReference(value = "user-books")
     private UserDto user;
 
     @JsonBackReference(value = "recommendation-book")
     private RecommendationDto recommendation;
-
-    public BookDto(Long id, String title, String authors, String description, String genre, String publisher, String publishedDate, String imageUrl, Double pageCount, Float average_rating, Boolean isBookMarked, Boolean isRead, Boolean isReading, Boolean isLike, UserDto user, RecommendationDto recommendation) {
-        this.id = id;
-        this.title = title;
-        this.authors = authors;
-        this.description = description;
-        this.genre = genre;
-        this.publisher = publisher;
-        this.publishedDate = publishedDate;
-        this.imageUrl = imageUrl;
-        this.pageCount = pageCount;
-        this.average_rating = average_rating;
-        this.isBookMarked = isBookMarked;
-        this.isRead = isRead;
-        this.isReading = isReading;
-        this.isLike = isLike;
-        this.user = user;
-        this.recommendation = recommendation;
-    }
 }

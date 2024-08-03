@@ -10,9 +10,13 @@
 /Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/exception/ModelNotFoundException.java
 /Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/model/Book.java
 /Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/model/DTO/BookDto.java
+/Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/model/DTO/BookResponseDto.java
+/Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/model/DTO/ObjectAlgoritmoDto.java
 /Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/model/DTO/RecommendationDto.java
 /Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/model/DTO/UserDto.java
 /Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/model/Recommendation.java
+/Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/model/RecommendationRequest.java
+/Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/model/RecommendationResponse.java
 /Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/model/User.java
 /Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/repository/IBookRepo.java
 /Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/repository/IGenericRepo.java
@@ -23,6 +27,8 @@
 /Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/service/IRecommendationService.java
 /Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/service/IUserService.java
 /Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/service/api/GoogleBooksClient.java
+/Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/service/api/LocalDateTimeAdapter.java
+/Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/service/api/RestAlgoritmo.java
 /Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/service/impl/BookServiceImpl.java
 /Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/service/impl/CRUDImpl.java
 /Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BookRecommender/BackEnd/src/main/java/com/backend/service/impl/RecommendationServiceImpl.java
