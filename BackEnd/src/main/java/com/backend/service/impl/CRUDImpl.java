@@ -35,7 +35,6 @@ public abstract class CRUDImpl <T, ID> implements ICRUD<T, ID> {
 
     @Override
     public T save(T t) {
-
         return getRepo().save(t);
     }
 
