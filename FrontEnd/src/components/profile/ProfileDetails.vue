@@ -3,9 +3,11 @@ import ProfileCategory from "./ProfileCategory.vue";
 import { ref, onMounted } from "vue";
 
 const books = ref([]);
+const isLoading = ref(true);
 
 const fetchBooks = async () => {
   try {
+    isLoading.value = true;
     const response = await fetch("http://localhost:9090/api/books");
     if (!response.ok) {
       throw new Error("Error al obtener los libros");
@@ -14,6 +16,8 @@ const fetchBooks = async () => {
     books.value = data;
   } catch (error) {
     console.error("Error:", error);
+  } finally {
+    isLoading.value = false;
   }
 };
 
@@ -26,7 +30,12 @@ onMounted(() => {
   <section
     class="flex flex-col gap-14 w-full max-h-full overflow-scroll custom-scrollbar"
   >
-    <ProfileCategory type="bookmarked" :books="books" />
+    <div v-if="isLoading" class="flex justify-center items-center h-full">
+      <div
+        class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-green-500"
+      ></div>
+    </div>
+    <ProfileCategory v-else type="bookmarked" :books="books" />
   </section>
 </template>
 
