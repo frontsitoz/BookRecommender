@@ -47,7 +47,7 @@ public class UserController {
     )
     @GetMapping("/findBy/{id}")
     public ResponseEntity<User> findById(@PathVariable Long id) {
-        User user = userService.findById(id);
+        User user = userService.findById(String.valueOf(id));
         return ResponseEntity.ok(user);
     }
 
@@ -58,6 +58,15 @@ public class UserController {
     @PostMapping("/save")
     public ResponseEntity<UserDto> save(@RequestBody UserDto userDto) {
         User user = convertToEntity(userDto);
+        Boolean userExist =
+                userService
+                        .existsByUsernameAndIdUserAndAndEmail(
+                                user.getUsername(),
+                                user.getIdUser(),
+                                user.getEmail());
+        if (userExist) {
+            return ResponseEntity.badRequest().build();
+        }
         User savedUser = userService.save(user);
         UserDto savedUserDto = convertToDto(savedUser);
         return ResponseEntity.ok(savedUserDto);
@@ -76,13 +85,13 @@ public class UserController {
     )
     @PutMapping("/{id}")
     public ResponseEntity<User> update(@RequestBody User user, @PathVariable Long id) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        User updatedUser = userService.update(user, id);
+        User updatedUser = userService.update(user, String.valueOf(id));
         return ResponseEntity.ok(updatedUser);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
-        userService.deleteById(id);
+        userService.deleteById(String.valueOf(id));
         return ResponseEntity.ok().build();
     }
 
