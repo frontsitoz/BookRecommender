@@ -1,15 +1,12 @@
 package com.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 @Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -20,6 +17,7 @@ public class Book {
 
     @Id
     @Column(name = "id_book")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idBook;
 
     @Column(length = 255)
@@ -46,6 +44,8 @@ public class Book {
     @Column(nullable = false)
     private Double pageCount;
 
+    private Float averageRating;
+
     private Integer rating;
 
     private Boolean isBookMarked;
@@ -58,6 +58,7 @@ public class Book {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user", nullable = true)
+//    @JsonBackReference(value = "user-books")
     private User user;
 
 //    @ManyToOne(fetch = FetchType.LAZY)
