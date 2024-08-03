@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -24,4 +25,13 @@ public class BookServiceImpl extends CRUDImpl<Book, Long> implements IBookServic
     public Optional<Book> findByTitleAndPageCountAndAuthors(String title, Double pageCount, String authors) {
         return bookRepo.findByTitleAndPageCountAndAuthors(title, pageCount, authors);
     }
+
+    @Override
+    public Book save(Book book) {
+    // Asegurarse de que el ID del libro no sea nulo
+    if (book.getIdBook() == null) {
+        book.setIdBook(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE);
+    }
+    return bookRepo.save(book);
+}
 }

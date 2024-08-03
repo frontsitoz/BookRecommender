@@ -86,6 +86,9 @@ public class BookController {
     @PostMapping("/save")
     public ResponseEntity<BookDto> save(@RequestBody BookDto book) {
         if (!isBookAlreadySaved(book.getTitle(), book.getPageCount(), book.getAuthors())) {
+            if (book.getIdBook() == null) {
+                book.setIdBook(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE);
+            }
             Book savedBook = bookService.save(convertToEntity(book));
             return ResponseEntity.ok(convertToDto(savedBook));
         } else {
