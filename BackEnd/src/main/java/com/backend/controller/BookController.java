@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Optional;
-
+import java.util.UUID;
 
 @Tag(name = "Book", description = "Books API")
 @RestController
@@ -44,10 +44,16 @@ public class BookController {
     public ResponseEntity<Page<BookDto>> searchBooks(
             @RequestParam String query,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "30") int size) {
+            @RequestParam(defaultValue = "40") int size) {
 
         List<Book> books = googleBooksClient.searchAndPrintBooks(query, page * size, size);
-        List<BookDto> bookDtos = books.stream().map(this::convertToDto).toList();
+        List<BookDto> bookDtos = books.stream()
+            .map(book -> {
+                BookDto dto = convertToDto(book);
+                dto.setIdBook(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE);
+                return dto;
+            })
+            .toList();
         Pageable pageable = PageRequest.of(page, size);
         Page<BookDto> bookPage = new PageImpl<>(bookDtos, pageable, bookDtos.size());
         return new ResponseEntity<>(bookPage, HttpStatus.OK);
@@ -80,6 +86,9 @@ public class BookController {
     @PostMapping("/save")
     public ResponseEntity<BookDto> save(@RequestBody BookDto book) {
         if (!isBookAlreadySaved(book.getTitle(), book.getPageCount(), book.getAuthors())) {
+            if (book.getIdBook() == null) {
+                book.setIdBook(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE);
+            }
             Book savedBook = bookService.save(convertToEntity(book));
             return ResponseEntity.ok(convertToDto(savedBook));
         } else {

@@ -19,6 +19,84 @@ const { book } = defineProps({
 const dialogContentClass = ref(
   "max-w-[840px] flex flex-col gap-6 px-16 py-8 bg-[#0A0C15] overflow-scroll custom-scrollbar"
 );
+
+const rating = ref(0);
+
+const setRating = (value) => {
+  if (rating.value === value) {
+    // Si el usuario hace clic en la estrella ya seleccionada, quita el rating
+    rating.value = 0;
+  } else {
+    // Si no, establece el nuevo rating
+    rating.value = value;
+  }
+};
+
+const isBookmarked = ref(false);
+
+const toggleBookmark = async () => {
+  try {
+    if (!isBookmarked.value) {
+      // Creamos el objeto que se enviaría como body
+      const bookData = {
+        idBook: book.idBook,
+        title: book.title,
+        authors: book.authors,
+        description: book.description,
+        genre: book.genre,
+        publisher: book.publisher,
+        publishedDate: book.publishedDate,
+        imageUrl: book.imageUrl,
+        pageCount: book.pageCount,
+        rating: 0,
+        isBookMarked: true,
+        isRead: false,
+        isReading: false,
+        isLiked: false,
+      };
+
+      const response = await fetch("http://localhost:9090/api/books/save", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error al guardar el libro");
+      }
+
+      const savedBook = await response.json();
+      console.log("Libro guardado:", savedBook);
+      book.idBook = savedBook.idBook;
+
+      console.log("Libro guardado exitosamente");
+      isBookmarked.value = true;
+    } else {
+      console.log("Eliminando bookmark del libro con ID:", book.idBook);
+
+      if (!book.idBook) {
+        throw new Error("No se puede eliminar un libro sin ID");
+      }
+      const response = await fetch(
+        `http://localhost:9090/api/books/${book.idBook}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Error al eliminar el libro");
+      }
+
+      console.log("Libro eliminado exitosamente");
+      isBookmarked.value = false;
+    }
+  } catch (error) {
+    console.error("Error al manejar el bookmark:", error);
+  }
+};
 </script>
 
 <template>
@@ -30,6 +108,7 @@ const dialogContentClass = ref(
         <img
           :src="book.imageUrl"
           alt="book_portrait"
+          draggable="false"
           class="w-full h-60 object-cover rounded-md mb-4"
         />
         <h3
@@ -64,6 +143,7 @@ const dialogContentClass = ref(
             :src="book.imageUrl"
             alt="book_portrait"
             class="w-[350px] max-w-[350px] h-[385px] object-cover rounded-lg mr-5"
+            draggable="false"
           />
 
           <div
@@ -112,24 +192,37 @@ const dialogContentClass = ref(
               </div>
             </div>
 
-            <div class="w-full h-10 flex justify-around">
-              <img
-                src="/images/unfavorite-icon.svg"
-                alt="star"
-                class="h-full invert cursor-pointer"
-              />
-
-              <img
-                src="/images/bookmark-icon.svg"
-                alt="bookmark"
-                class="h-full invert cursor-pointer"
-              />
-
-              <img
-                src="/images/book-open-icon.svg"
-                alt="open_book"
-                class="h-full invert cursor-pointer"
-              />
+            <div class="w-full flex">
+              <div class="w-max px-10 h-10 flex justify-around">
+                <img
+                  src="/images/bookmark-icon.svg"
+                  alt="bookmark"
+                  class="w-12 h-full cursor-pointer"
+                  :class="{
+                    'invert opacity-100': isBookmarked,
+                    'invert opacity-50': !isBookmarked,
+                  }"
+                  @click="toggleBookmark"
+                  draggable="false"
+                />
+              </div>
+              <div class="w-full h-10 flex justify-center items-center">
+                <img
+                  v-for="star in 5"
+                  :key="star"
+                  src="/images/unfavorite-icon.svg"
+                  :alt="'Estrella ' + star"
+                  @click="setRating(star)"
+                  draggable="false"
+                  :class="[
+                    'h-10 w-10 cursor-pointer mx-1 invert',
+                    {
+                      'opacity-100': star <= rating,
+                      'opacity-50': star > rating,
+                    },
+                  ]"
+                />
+              </div>
             </div>
           </div>
         </div>
