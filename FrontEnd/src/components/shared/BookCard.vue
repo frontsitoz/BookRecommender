@@ -7,14 +7,20 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
-const { book } = defineProps({
+const props = defineProps({
   book: {
     type: Object,
     required: true,
   },
+  isBookMarked: {
+    type: Boolean,
+    default: false,
+  },
 });
+
+const { book } = props;
 
 const dialogContentClass = ref(
   "max-w-[840px] flex flex-col gap-6 px-16 py-8 bg-[#0A0C15] overflow-scroll custom-scrollbar"
@@ -32,12 +38,16 @@ const setRating = (value) => {
   }
 };
 
-const isBookmarked = ref(false);
+const isBookmarked = ref(props.isBookMarked);
+
+onMounted(() => {
+  isBookmarked.value = props.isBookMarked;
+});
 
 const toggleBookmark = async () => {
   try {
-    if (!isBookmarked.value) {
-      // Creamos el objeto que se enviaría como body
+    const newBookmarkedState = !isBookmarked.value;
+    if (newBookmarkedState) {
       const bookData = {
         idBook: book.idBook,
         title: book.title,
@@ -48,11 +58,11 @@ const toggleBookmark = async () => {
         publishedDate: book.publishedDate,
         imageUrl: book.imageUrl,
         pageCount: book.pageCount,
-        rating: 0,
+        rating: book.rating || 0,
         isBookMarked: true,
-        isRead: false,
-        isReading: false,
-        isLiked: false,
+        isRead: book.isRead || false,
+        isReading: book.isReading || false,
+        isLike: book.isLike || false,
       };
 
       const response = await fetch("http://localhost:9090/api/books/save", {
@@ -69,33 +79,47 @@ const toggleBookmark = async () => {
 
       const savedBook = await response.json();
       console.log("Libro guardado:", savedBook);
+
       book.idBook = savedBook.idBook;
-
-      console.log("Libro guardado exitosamente");
-      isBookmarked.value = true;
+      book.isBookMarked = true;
     } else {
-      console.log("Eliminando bookmark del libro con ID:", book.idBook);
-
       if (!book.idBook) {
         throw new Error("No se puede eliminar un libro sin ID");
       }
-      const response = await fetch(
-        `http://localhost:9090/api/books/${book.idBook}`,
-        {
-          method: "DELETE",
+      console.log("Intentando eliminar libro con ID:", book.idBook);
+      try {
+        const response = await fetch(
+          `http://localhost:9090/api/books/${book.idBook}`,
+          {
+            method: "DELETE",
+          }
+        );
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error("Error response:", response.status, errorText);
+          throw new Error(`Error al eliminar el libro: ${errorText}`);
         }
-      );
 
-      if (!response.ok) {
-        throw new Error("Error al eliminar el libro");
+        console.log("Libro eliminado exitosamente");
+        book.isBookMarked = false;
+      } catch (error) {
+        console.error("Error al eliminar el libro:", error);
+        // No lanzar el error aquí, solo registrarlo
       }
-
-      console.log("Libro eliminado exitosamente");
-      isBookmarked.value = false;
     }
+
+    isBookmarked.value = newBookmarkedState;
+    emit("book-updated", { ...book, isBookMarked: newBookmarkedState });
   } catch (error) {
     console.error("Error al manejar el bookmark:", error);
   }
+};
+
+const emit = defineEmits(["book-updated"]);
+
+const updateBookInList = (updatedBook) => {
+  emit("book-updated", updatedBook);
 };
 </script>
 

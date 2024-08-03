@@ -95,13 +95,13 @@ public class GoogleBooksClient {
                 Double pageCount = (Double) volumeInfo.get("pageCount");
 
                 BookDto book = new BookDto();
-                book.setId(0L);
+                book.setIdBook(null);
                 book.setTitle(title != null ? title : "Unknown Title");
                 book.setAuthors(authors != null ? authors.toString() : "[Unknown Authors]");
                 book.setGenre(category != null ? category.toString() : "[Unknown Category]");
                 book.setIsBookMarked(true);
                 book.setPageCount(pageCount != null ? pageCount : 0);
-                book.setAverage_rating(averageRating);
+                book.setAverageRating(averageRating);
                 book.setImageUrl(thumbnail != null ? thumbnail : "http://example.com/default-thumbnail.jpg");
                 book.setPublishedDate(publishedDate != null ? publishedDate : "Unknown Date");
                 book.setPublisher(publisher != null ? publisher : "Unknown Publisher");

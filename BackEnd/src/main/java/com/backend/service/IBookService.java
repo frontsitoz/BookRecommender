@@ -4,15 +4,13 @@ import com.backend.model.Book;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
 import java.util.Optional;
 
-public interface IBookService extends ICRUD<Book, Long> {
+public interface IBookService extends ICRUD<Book, Long>{
 
     Optional<Book> findByTitleAndPageCountAndAuthors(String title,
-                                                     Double pageCount,
-                                                     String authors);
+                                                       Double pageCount,
+                                                       String authors);
 
-    List<Book> findByUserIdUser(String idUser);
-
+    boolean deleteById(Long id);
 }
